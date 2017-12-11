@@ -36,27 +36,27 @@
                     <tbody>
                     <?php
                     $count=1;
-                    foreach ($urun_list as $user_row){?>
+                    foreach ($urun_list as $p_row){?>
                     <tr>
                         <th scope="row"><?=$count++?></th>
-                        <td><?=$user_row->id;?></td>
-                        <td><?=$user_row->cat_id;?></td>
-                        <td><?=$user_row->name;?></td>
-                        <td><?=$user_row->s_price;?></td>
-                        <td><?=$user_row->b_price;?></td>
-                        <td><?=$user_row->stock;?></td>
-                        <td><img width="50px" height="50px" src=" <?=base_url()."uploads/products/default_product.png";?>"></td>
-                        <td><?=$user_row->create_time;?></td>
-                        <td><?=$user_row->update_time;?></td>
+                        <td><?=$p_row->id;?></td>
+                        <td><?=$p_row->cat_name;?></td>
+                        <td><?=$p_row->name;?></td>
+                        <td><?=$p_row->b_price;?></td>
+                        <td><?=$p_row->s_price;?></td>
+                        <td><?=$p_row->stock;?></td>
+                        <td><img width="50px" height="50px" src=" <?=base_url()."uploads/products/".$p_row->preview_img;?>"></td>
+                        <td><?=$p_row->create_time;?></td>
+                        <td><?=$p_row->update_time;?></td>
           <!--######################3Parametre olarak giden bütün usernameler ID olarak değiştirilicek####################################3-->
                         <td>
-                            <a href="<?=base_url()."admin/urunler/urun_detay/".$user_row->id?>" class="btn btn-outline-success btn-sm">Detay</a>
+                            <a href="<?=base_url()."admin/urunler/urun_detay/".$p_row->id?>" class="btn btn-outline-success btn-sm">Detay</a>
                         </td>
                         <td>
-                            <a href="<?=base_url()."admin/urunler/urun_duzenle/".$user_row->id?>" class="btn btn-outline-warning btn-sm">Düzenle</a>
+                            <a href="<?=base_url()."admin/urunler/urun_duzenle/".$p_row->id?>" class="btn btn-outline-warning btn-sm">Düzenle</a>
                         </td>
                         <td>
-                            <a href="<?=base_url()."admin/urunler/urun_sil/".$user_row->id?>" onclick="return confirm('are you sure')" class="btn btn-outline-danger btn-sm">Sil</a>
+                            <a href="<?=base_url()."admin/urunler/urun_sil/".$p_row->id?>" onclick="return confirm('are you sure')" class="btn btn-outline-danger btn-sm">Sil</a>
                         </td>
                     </tr>
                     <?php  } ?>

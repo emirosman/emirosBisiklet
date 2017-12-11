@@ -33,7 +33,7 @@
                     <tr>
                         <th scope="row"><?=$count++?></th>
                         <td><?=$cat_row->id;?></td>
-                        <td><?=$cat_row->parent_id;?></td>
+                        <td><?=$cat_row->p_cat_name;?></td>
                         <td><?=$cat_row->name;?></td>
                         <td>
                             <a href="<?=base_url()."admin/kategoriler/kategori_duzenle/".$cat_row->id?>" class="btn btn-outline-warning btn-sm">Düzenle</a>

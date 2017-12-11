@@ -13,8 +13,11 @@ class Kategoriler extends CI_Controller {
 
 	public function index()
 	{
-	    $query=$this->db->query("SELECT * FROM category");
-	    $data["cat_list"]=$query->result();
+	    /*$query=$this->db->query("SELECT * FROM category");
+	    $data["cat_list"]=$query->result();*/
+	    $this->load->model("Database_Model");
+        $data["cat_list"]=$this->Database_Model->get_kategoriler();
+
 
 
 		$this->load->view('admin/_header');
