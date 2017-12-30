@@ -9,7 +9,7 @@ class Database_Model extends CI_Model {
     public function login_control($table,$user,$pass)
     {
 
-        $query=$this->db->query("SELECT * FROM $table WHERE username='".$user."' AND password='".$pass."' LIMIT 1");
+        $query=$this->db->query("SELECT * FROM $table WHERE username='".$user."'AND authority='admin' AND password='".$pass."' LIMIT 1");
         if($query->num_rows()==1)
         {
             return $query->result();

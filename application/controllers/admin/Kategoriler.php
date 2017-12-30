@@ -47,7 +47,7 @@ class Kategoriler extends CI_Controller {
 
         if($this->db->insert('category',$kategori_ekle))
         {
-            $this->session->set_flashdata("cat_ekle","Kategori kaydı Başarılı");
+            $this->session->set_flashdata("cat_msj","Kategori eklendi");
             redirect(base_url()."admin/kategoriler");
         }/*else{//buraya gelmeden zaten hata veriyo buna gerek kalmıyo!!yinede kontrol et
             $this->session->set_flashdata("uye_ekle","Üye kaydı yapılamadı");
@@ -57,8 +57,10 @@ class Kategoriler extends CI_Controller {
     }
     public function kategori_duzenle($id)//id yerine username kullanıldı düzeltilicek
     {
-        $query=$this->db->query("SELECT * FROM users where id='$id'");
+        $query=$this->db->query("SELECT * FROM category where id='$id'");
         $data['veri']=$query->result();
+        $query2=$this->db->query("SELECT * FROM category");
+        $data["cats"]=$query2->result();
         $this->load->view('admin/_header');
         $this->load->view('admin/_sidebar');
         $this->load->view("admin/kategori_duzenle",$data);
@@ -68,18 +70,11 @@ class Kategoriler extends CI_Controller {
     {
         $this->load->model("Database_Model");
         $data=array(
-            'username'=>$this->input->post("username"),
-            'password'=>$this->input->post("password"),
-            'password-again'=>$this->input->post("password-again"),
-            'name'=>$this->input->post("name"),
-            'surname'=>$this->input->post("surname"),
-            'email'=>$this->input->post("username"),
-            'address'=>$this->input->post("address"),
-            'newsletter'=>$this->input->post("newsletter"),
-            'authority'=>$this->input->post("authority"),
-            'status'=>$this->input->post("status")
+            'parent_id'=>$this->input->post("parent_id"),
+            'name'=>$this->input->post("name")
         );
         $this->Database_Model->update_data("category",$data,$id);
+        $this->session->set_flashdata("cat_msj","Kategori düzenlendi");
         redirect(base_url()."admin/kategoriler");
 
 
@@ -87,6 +82,7 @@ class Kategoriler extends CI_Controller {
     public function kategori_sil($id)
     {
         $this->db->query("DELETE FROM category WHERE id='$id'");//username id ile değişicek !!!!!!!!!!!!!!!!!!!
+        $this->session->set_flashdata("cat_msj","Kategori silindi");
         redirect(base_url()."admin/kategoriler");
     }
 

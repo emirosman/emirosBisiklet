@@ -1,12 +1,9 @@
 <div class="content-inner">
     <!-- Page Header-->
     <header class="page-header">
-        <div class="container-fluid row">
+        <div class="container-fluid ">
             <h2 class="col-8">Üyeler</h2>
-            <div class="input-group col-4">
-                <input id="searchBox" type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn"><button id="searchBtn" class="btn btn-default" type="button"><span class="fa fa-search"></span></button></span>
-            </div>
+            <?=($this->session->flashdata("list_msj")==null)?"": "<label class='text-success col-sm-8'>".$this->session->flashdata("list_msj")."</label>"?>
         </div>
     </header>
     <!--Tablo Başlangıç-->
@@ -19,7 +16,6 @@
             </div>-->
             <div class="card-body">
                 <h5><a href="<?=base_url()."admin/uyeler/uye_ekle"?>"><span class="fa fa-plus"></span>Üye Ekle</a></h5>
-                <label class="alert-success"> <?=$this->session->flashdata("list_msj")?></label>
                 <table class="table table-striped table-responsive table-bordered" >
                     <thead>
                     <tr>

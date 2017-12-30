@@ -15,6 +15,7 @@
             <li> <a href="<?=base_url()."admin/uyeler"?>"><i class="icon-user"></i>Kullanıcılar</a></li>
             <li> <a href="<?=base_url()."admin/kategoriler"?>"><i class="fa fa-book"></i>Kategoriler</a></li>
             <li> <a href="<?=base_url()."admin/urunler"?>"><i class="fa fa-bicycle"></i>Ürünler</a></li>
+            <li> <a href="<?=base_url()."admin/ayarlar"?>"><i class="fa fa-gears"></i>Ayarlar</a></li>
             <li> <a href="index.html"><i class="icon-bill"></i>Siparişler</a></li>
             <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Dropdown </a>
                 <ul id="dashvariants" class="collapse list-unstyled">

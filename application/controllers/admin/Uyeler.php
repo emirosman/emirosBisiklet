@@ -109,9 +109,28 @@ class Uyeler extends CI_Controller {
             'authority'=>$this->input->post("authority"),
             'status'=>$this->input->post("status")
         );
+        $ctrl_usrname=$this->db->query( "SELECT * FROM users WHERE username='".$data['username']."' AND id<>'".$id."'");
+        $ctrl_email=$this->db->query( "SELECT * FROM users WHERE email='".$data['email']."' AND id<>'".$id."'");
+        if($ctrl_usrname->result()!=null OR $ctrl_email->result()!=null)
+        {
+            if($ctrl_email->result()!=null)
+            {
+                $this->session->set_flashdata("err_mail","Bu mail zaten kullanılıyor!");
+            }
+            if($ctrl_usrname->result()!=null)
+            {
+                $this->session->set_flashdata("err_username","Kullanıcı adı alınmış!");
+            }
+                redirect(base_url()."admin/uyeler/uye_duzenle/".$id);
+        }
+        else{
         $this->Database_Model->update_data("users",$data,$id);
         $this->session->set_flashdata("dzn_msj","Bilgiler güncellendi");
         redirect(base_url()."admin/uyeler/uye_duzenle/".$id);
+
+        }
+
+
 
 
     }

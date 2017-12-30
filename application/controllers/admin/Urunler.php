@@ -52,7 +52,7 @@ class Urunler extends CI_Controller {
 
         if($this->db->insert('products',$urun_ekle))
         {
-            $this->session->set_flashdata("urun_ekle","Ürün kaydı Başarılı");
+            $this->session->set_flashdata("urun_msj","Ürün kaydı Başarılı");
             redirect(base_url()."admin/urunler");
         }/*else{//buraya gelmeden zaten hata veriyo buna gerek kalmıyo!!yinede kontrol et
             $this->session->set_flashdata("uye_ekle","Üye kaydı yapılamadı");
@@ -90,7 +90,7 @@ class Urunler extends CI_Controller {
     public function urun_sil($id)
     {
         $this->db->query("DELETE FROM products WHERE id='$id'");
-        //set flash data
+        $this->session->set_flashdata("urun_msj","Ürün silindi");
         redirect(base_url()."admin/urunler");
     }
     public function galeri_sil($id,$img_id)

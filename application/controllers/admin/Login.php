@@ -22,7 +22,7 @@ class Login extends CI_Controller {
         $pass=$this->security->xss_clean($pass);
 
         $this->load->model("Database_Model");
-        $db_result=$this->Database_Model->login_control("users",$user,$pass);
+        $db_result=$this->Database_Model->login_control("users",$user,$pass);//admin mi değilmi burda kontrol ediceksin
         if ($db_result)
         {
             $res_array=array(
@@ -40,23 +40,13 @@ class Login extends CI_Controller {
                 'create_time'=>$db_result[0]->create_time
             );
             $this->session->set_userdata("admin_sess",$res_array);
-            if($this->session->admin_sess['authority']=="admin")
-            {
-                redirect(base_url()."admin/home");
-            }else{
-                redirect(base_url()."user/home");
-            }
+            redirect(base_url()."admin/home");
+
         }else{
             $this->session->set_flashdata("msj","Hatalı kullanıcı adı veya şifre");
             redirect(base_url()."admin/login");
         }
-        //foreach ($db_result as $don)
-        //{echo $don->username;}
-
-
-/*
-        $this->load->view("admin/test");
-*/    }
+    }
     public function be_logout()
     {
         $this->session->unset_userdata("admin_sess");

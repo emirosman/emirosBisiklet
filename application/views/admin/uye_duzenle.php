@@ -1,9 +1,9 @@
 <div class="content-inner">
     <!-- Page Header-->
     <header class="page-header">
-        <div class="container-fluid row">
+        <div class="container-fluid">
             <h2 class="col-3">Üye Düzenle Formu</h2>
-            <label class="alert-success"><?=$this->session->flashdata("dzn_msj");?></label>
+            <?=($this->session->flashdata("dzn_msj")==null)?"": "<label class='text-success col-8'>".$this->session->flashdata("dzn_msj")."</label>"?>
         </div>
 
     </header>
@@ -22,7 +22,7 @@
                                 <label class="col-sm-2 form-control-label">Kullanıcı Adı</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="username" class="form-control" required value="<?=$uye[0]->username?>">
-                                    <label id="login-username-error" class="error"><?=$this->session->flashdata("msg-username");?></label><!--login sayfasındaki css ler farklı olabilir-->
+                                    <?=($this->session->flashdata("err_username")==null)?"": "<label class='text-danger col-sm-8'>".$this->session->flashdata("err_username")."</label>"?>
                                 </div>
                             </div>
                             <!--Password-->
@@ -30,13 +30,6 @@
                                 <label class="col-sm-2 form-control-label">Parola</label>
                                 <div class="col-sm-8">
                                     <input type="password" name="password" class="form-control" required value="<?=$uye[0]->password?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 form-control-label">Parola Tekrar</label>
-                                <div class="col-sm-8">
-                                    <input type="password" name="password-again" class="form-control" required value="<?=$uye[0]->password?>">
-                                    <label id="login-username-error" class="error"><?=$this->session->flashdata("msg-password");?></label><!--login sayfasındaki css ler farklı olabilir-->
                                 </div>
                             </div>
                             <!--Name-->
@@ -58,8 +51,7 @@
                                 <label class="col-sm-2 form-control-label">E-mail</label>
                                 <div class="col-sm-8">
                                     <input type="email" name="email" class="form-control" required value="<?=$uye[0]->email?>">
-                                    <label id="login-username-error" class="error"><?=$this->session->flashdata("msg-email");?></label><!--login sayfasındaki css ler farklı olabilir-->
-
+                                    <?=($this->session->flashdata("err_mail")==null)?"": "<label class='text-danger col-sm-8'>".$this->session->flashdata("err_mail")."</label>"?>
                                 </div>
                             </div>
                             <!--Phone-->

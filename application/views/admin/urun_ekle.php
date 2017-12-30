@@ -3,10 +3,6 @@
     <header class="page-header">
         <div class="container-fluid row">
             <h2 class="col-8">Ürün Kayıt Formu</h2>
-            <div class="input-group col-4">
-                <input id="searchBox" type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn"><button id="searchBtn" class="btn btn-default" type="button"><span class="fa fa-search"></span></button></span>
-            </div>
         </div>
     </header>
     <!--Form Başlangıç-->
@@ -34,6 +30,7 @@
                                 </select>
                             </div>
                         </div>
+                        <!--Alış-->
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Alış Fiyat</label>
                             <div class="col-sm-6">
@@ -41,28 +38,31 @@
                                 <label id="login-username-error" class="error"><?=$this->session->flashdata("msg-password");?></label><!--login sayfasındaki css ler farklı olabilir-->
                             </div>
                         </div>
-                        <!--İsim-->
+                        <!--Satış-->
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Satış Fiyat</label>
                             <div class="col-sm-6">
                                 <input type="text" name="s_price" class="form-control" required>
                             </div>
                         </div>
-                        <!--Soyisim-->
+                        <!--Stok-->
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Stok</label>
                             <div class="col-sm-6">
                                 <input type="text" name="stock" class="form-control" required>
                             </div>
                         </div>
-                        <!--Email-->
+                        <!--Açıklama-->
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Açıklama</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="description" class="form-control" required>
-                                <label id="login-username-error" class="error"><?=$this->session->flashdata("msg-email");?></label><!--login sayfasındaki css ler farklı olabilir-->
-
-                            </div>
+                            <div class="col-sm-9">
+                                    <textarea name="editor1" id="editor1"  class="form-control"></textarea>
+                                    <script>
+                                        // Replace the <textarea id="editor1"> with a CKEditor
+                                        // instance, using default configuration.
+                                        CKEDITOR.replace( 'editor1' );
+                                    </script>
+                        </div>
                         </div>
                     <div class="form-group row col-12">
                         <div class="col-sm-4 offset-sm-3">

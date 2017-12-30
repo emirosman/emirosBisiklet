@@ -3,10 +3,6 @@
     <header class="page-header">
         <div class="container-fluid row">
             <h2 class="col-8">Ürün Kayıt Formu</h2>
-            <div class="input-group col-4">
-                <input id="searchBox" type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn"><button id="searchBtn" class="btn btn-default" type="button"><span class="fa fa-search"></span></button></span>
-            </div>
         </div>
     </header>
     <!--Form Başlangıç-->

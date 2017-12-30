@@ -16,25 +16,25 @@
                 <h3 class="h4">Üye Kayıt Formu</h3>
             </div>-->
             <div class="card-body">
-                <form class="form-horizontal" method="post" action="<?=base_url()."admin/uyeler/uye_duzenle_kayit/".$veri[0]->username?>"><!--username yenine ID gelicek-->
-                    <!--Username-->
+                <form class="form-horizontal" method="post" action="<?=base_url()."admin/kategoriler/kategori_duzenle_kayit/".$veri[0]->id?>">
+                    <!--Üst Kategori-->
                     <div class="form-group row">
-                        <label class="col-sm-3 form-control-label">Normal</label>
+                        <label class="col-sm-3 form-control-label">Üst Kategori</label>
                         <div class="col-sm-4">
-                            <input type="text" name="username" class="form-control" value="<?=$veri[0]->username?>">
+                            <select class="form-control" name="parent_id">
+                                <?php foreach ($cats as $c_rs) {?>
+                                    <option <?= ($c_rs->id==$veri[0]->parent_id)?"selected":""?> value="<?=$c_rs->id?>" >
+                                        <?= $c_rs->name?>
+                                    </option>
+                                <?php }?>
+                            </select>
                         </div>
                     </div>
-                    <!--Password-->
+                    <!--Kategori İsmi-->
                     <div class="form-group row">
-                        <label class="col-sm-3 form-control-label">Password</label>
+                        <label class="col-sm-3 form-control-label">İsim</label>
                         <div class="col-sm-4">
-                            <input type="text" value="<?=$veri[0]->password?>" name="password" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 form-control-label">Password Again</label>
-                        <div class="col-sm-4">
-                            <input type="password" name="password_control" value="<?=$veri[0]->password?>" class="form-control">
+                            <input type="text" value="<?=$veri[0]->name?>" name="name" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
