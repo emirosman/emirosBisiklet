@@ -18,35 +18,35 @@
                     <div class="col-md-12">
                         <!--Username-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Kullanıcı Adı </label>
+                            <label class="col-sm-3 form-control-label">Kullanıcı Adı </label>
                             <div class="col-sm-8">
                                 <?=$uye[0]->username?>
                             </div>
                         </div>
                         <!--Password-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Parola</label>
+                            <label class="col-sm-3 form-control-label">Parola</label>
                             <div class="col-sm-8">
                                 <?=$uye[0]->password?>
                             </div>
                         </div>
                         <!--Name-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">İsim</label>
+                            <label class="col-sm-3 form-control-label">İsim</label>
                             <div class="col-sm-8">
                                 <?=$uye[0]->name?>
                             </div>
                         </div>
                         <!--Surname-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Soyisim</label>
+                            <label class="col-sm-3 form-control-label">Soyisim</label>
                             <div class="col-sm-8">
                                 <?=$uye[0]->surname?>
                             </div>
                         </div>
                         <!--Email-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">E-mail</label>
+                            <label class="col-sm-3 form-control-label">E-mail</label>
                             <div class="col-sm-8">
                                 <?=$uye[0]->email?>
 
@@ -54,28 +54,28 @@
                         </div>
                         <!--Phone-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Telefon</label>
+                            <label class="col-sm-3 form-control-label">Telefon</label>
                             <div class="col-sm-8">
                                 <?=$uye[0]->surname?>
                             </div>
                         </div>
                         <!--Newsletter-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Bülten</label>
+                            <label class="col-sm-3 form-control-label">Bülten</label>
                             <div class="col-sm-8 ">
                                 <?=($uye[0]->newsletter==0)?"Abone Değil":"Abone"?>
                             </div>
                         </div>
                         <!--Authority-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Yetki</label>
+                            <label class="col-sm-3 form-control-label">Yetki</label>
                             <div class="col-sm-8">
                                     <?=$uye[0]->authority?>
                             </div>
                         </div>
                         <!--Status-->
                         <div class="form-group row">
-                            <label class="col-sm-2 form-control-label">Durum</label>
+                            <label class="col-sm-3 form-control-label">Durum</label>
                             <div class="col-sm-8">
                                  <?=($uye[0]->status==1)?"Aktif":"Pasif"?>
                             </div>

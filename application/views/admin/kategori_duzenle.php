@@ -2,11 +2,7 @@
     <!-- Page Header-->
     <header class="page-header">
         <div class="container-fluid row">
-            <h2 class="col-8">Üye Düzenle Formu</h2>
-            <div class="input-group col-4">
-                <input id="searchBox" type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn"><button id="searchBtn" class="btn btn-default" type="button"><span class="fa fa-search"></span></button></span>
-            </div>
+            <h2 class="col-8">Kategori Düzenle Formu</h2>
         </div>
     </header>
     <!--Form Başlangıç-->

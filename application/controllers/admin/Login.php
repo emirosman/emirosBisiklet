@@ -22,7 +22,7 @@ class Login extends CI_Controller {
         $pass=$this->security->xss_clean($pass);
 
         $this->load->model("Database_Model");
-        $db_result=$this->Database_Model->login_control("users",$user,$pass);//admin mi değilmi burda kontrol ediceksin
+        $db_result=$this->Database_Model->login_admin_control("users",$user,$pass);//admin mi değilmi burda kontrol ediceksin
         if ($db_result)
         {
             $res_array=array(

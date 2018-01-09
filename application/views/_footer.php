@@ -72,7 +72,7 @@
                 <div class="col-sm-3">
                     <div class="address">
                         <img src="<?= base_url()?>/assets/images/home/map.png" alt="" />
-                        <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                        <p class="col-sm-offset-2">81 İlde Hizmetinizde</p>
                     </div>
                 </div>
             </div>
@@ -148,8 +148,8 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
-                <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                <p class="pull-left">Emirosman Bisiklet © 2017-<?=date('Y')?></p>
+                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Emirosman</a></span></p>
             </div>
         </div>
     </div>

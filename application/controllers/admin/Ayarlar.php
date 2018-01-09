@@ -26,8 +26,8 @@ class Ayarlar extends CI_Controller {
         $this->load->model("Database_Model");
         $data=array(
             'adi'=>$this->input->post("adi"),
-            'keywords'=>$this->input->post("keywords"),
-            'description'=>$this->input->post("description"),
+            'meta_keywords'=>$this->input->post("keywords"),
+            'meta_description'=>$this->input->post("description"),
             'smtp_server'=>$this->input->post("smtpserver"),
             'smtp_port'=>$this->input->post("smtpport"),
             'smtp_email'=>$this->input->post("smtpemail"),

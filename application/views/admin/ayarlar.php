@@ -46,13 +46,13 @@
                                         <div class="form-group">
                                             <label class=" form-control-label col-sm-2">Açıklama: </label>
                                             <div class="col-sm-offset-2">
-                                                <input type="text" class="form-control" value="<?=$veri[0]->description?>" name="description" placeholder="" required>
+                                                <input type="text" class="form-control" value="<?=$veri[0]->meta_description?>" name="description" placeholder="" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class=" form-control-label col-sm-2">Anahtar Kelimeler: </label>
                                             <div class="col-sm-offset-2">
-                                                <input type="text" class="form-control" value="<?=$veri[0]->keywords?>"  name="keywords" placeholder="" required>
+                                                <input type="text" class="form-control" value="<?=$veri[0]->meta_keywords?>"  name="keywords" placeholder="" required>
                                             </div>
                                         </div><div class="form-group">
                                             <label class="form-control-label col-sm-2">Adres: </label>

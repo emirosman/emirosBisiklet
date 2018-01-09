@@ -18,7 +18,22 @@
                             <div id="sportswear" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Nike </a></li>
+                                        <li>
+                                                <a data-toggle="collapse" href="#osman">
+                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                    osman
+                                                </a>
+                                            <div id="osman" class="panel-collapse collapse">
+                                                <div>
+                                                    <ul>
+                                                        <li><a href="#">a</a></li>
+                                                        <li><a href="#">a</a></li>
+                                                        <li><a href="#">a</a></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </li>
                                         <li><a href="#">Under Armour </a></li>
                                         <li><a href="#">Adidas </a></li>
                                         <li><a href="#">Puma</a></li>
@@ -134,10 +149,6 @@
                             <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
                         </div>
                     </div><!--/price-range-->
-
-                    <div class="shipping text-center"><!--shipping-->
-                        <img src="images/home/shipping.jpg" alt="" />
-                    </div><!--/shipping-->
 
                 </div>
             </div><!--/sidebar-->
