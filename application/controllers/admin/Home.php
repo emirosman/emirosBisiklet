@@ -18,6 +18,7 @@ class Home extends CI_Controller {
         $this->load->view('admin/_content');
         $this->load->view('admin/_footer');
 	}
+
 	public function test ($x,$y)
     {
         echo "parametre ".$x. " ". $y;

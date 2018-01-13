@@ -35,7 +35,7 @@
                             <a href="<?=base_url()."admin/kategoriler/kategori_duzenle/".$cat_row->id?>" class="btn btn-outline-warning btn-sm">Düzenle</a>
                         </td>
                         <td>
-                            <a href="<?=base_url()."admin/kategoriler/kategori_sil/".$cat_row->id?>" onclick="return confirm('are you sure')" class="btn btn-outline-danger btn-sm">Sil</a>
+                            <a href="<?=base_url()."admin/kategoriler/kategori_sil/".$cat_row->id?>" onclick="return confirm('Kategori silinecek emin misiniz?')" class="btn btn-outline-danger btn-sm">Sil</a>
                         </td>
                     </tr>
                     <?php  } ?>

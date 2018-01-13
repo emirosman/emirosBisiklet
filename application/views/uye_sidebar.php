@@ -13,17 +13,17 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Siparişlerim</a></h4>
+                                <h4 class="panel-title"><a href="<?=base_url()."uye/siparislerim"?>">Siparişlerim</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Sepetim</a></h4>
+                                <h4 class="panel-title"><a href="<?=base_url()."uye/sepetim"?>">Sepetim</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Favori Ürünlerim</a></h4>
+                                <h4 class="panel-title"><a href="<?=base_url()."uye/favorilerim"?>">Favori Ürünlerim</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Yorumlarım</a></h4>
+                                <h4 class="panel-title"><a href="<?=base_url()."uye/yorumlarim"?>">Yorumlarım</a></h4>
                             </div>
                         </div>
                     </div><!--/category-products-->

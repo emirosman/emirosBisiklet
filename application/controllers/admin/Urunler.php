@@ -44,8 +44,8 @@ class Urunler extends CI_Controller {
             's_price'=>$this->input->post("s_price"),
             'b_price'=>$this->input->post("b_price"),
             'preview_img'=>"default_product.png",
-            'stock'=>($this->input->post("stock")!="")?1:0,
-            'description'=>$this->input->post("description"),
+            'stock'=>$this->input->post("stock"),
+            'description'=>$this->input->post("editor1"),
             'create_time'=>date("Y-m-d h:i:s"),
             'update_time'=>date("Y-m-d h:i:s")
         );
@@ -85,6 +85,7 @@ class Urunler extends CI_Controller {
             'description'=>$this->input->post("editor1")
         );
         $this->Database_Model->update_data("products",$data,$id);
+        $this->session->set_flashdata("success","Bilgiler güncellendi");
         redirect(base_url()."admin/urunler/urun_duzenle/".$id);
     }
     public function urun_sil($id)
@@ -96,7 +97,7 @@ class Urunler extends CI_Controller {
     public function galeri_sil($id,$img_id)
     {
         $this->db->query("DELETE FROM p_gallery WHERE id='$img_id'");
-        //set flash data
+        $this->session->set_flashdata("success","Resim silindi");
         redirect(base_url()."admin/urunler/urun_duzenle/$id");
     }
     public function galeri_sec($p_id,$img_name)
@@ -106,7 +107,7 @@ class Urunler extends CI_Controller {
           'preview_img'=>$img_name
         );
         $this->Database_Model->update_data("products",$data,$p_id);
-        //set flash data
+        $this->session->set_flashdata("success","Kapak resmi seçildi");
         redirect(base_url()."admin/urunler/urun_duzenle/".$p_id);
     }
     public function galeri_ekle($p_id)
@@ -126,13 +127,98 @@ class Urunler extends CI_Controller {
                 'image'=>$img_data['raw_name'].$img_data['file_ext']
             );
             $this->db->insert('p_gallery',$data);
-            $this->session->set_flashdata("dzn_msj","Resim Eklendi");
+            $this->session->set_flashdata("success","Resim Eklendi");
             redirect(base_url()."admin/urunler/urun_duzenle/".$p_id);
         }
         else
         {
             echo $this->upload->display_errors();
 
+        }
+    }
+    public function slider()
+    {
+        $this->load->model("Database_Model");
+        $data["sliders"]= $this->Database_Model->get_sliders();
+
+        $this->load->view('admin/_header');
+        $this->load->view('admin/_sidebar');
+        $this->load->view('admin/slider_liste',$data);
+        $this->load->view('admin/_footer');
+    }
+    public function slider_sil($id)
+    {
+        $this->db->query("DELETE FROM sliders WHERE id='$id'");
+        $this->session->set_flashdata("success","Slider silindi");
+        redirect(base_url()."admin/urunler/slider");
+    }
+    public function slider_duzenle($id)
+    {
+        $this->load->model("Database_Model");
+        $data['slider']=$this->Database_Model->get_slider($id);
+        $query=$this->db->query("SELECT id,name FROM products");
+        $data["urunler"]=$query->result();
+        $this->load->view('admin/_header');
+        $this->load->view('admin/_sidebar');
+        $this->load->view("admin/slider_duzenle",$data);
+        $this->load->view('admin/_footer');
+    }
+    public function slider_duzenle_kayit($id)
+    {
+        $data=array(
+            'product_id'=>$this->input->post('product'),
+            'status'=>(int)$this->input->post('status')
+        );
+        $this->load->model("Database_Model");
+        $this->Database_Model->update_data("sliders",$data,$id);
+        $this->session->set_flashdata("success","Bilgiler güncellendi");
+        redirect(base_url()."admin/urunler/slider_duzenle/".$id);
+    }
+    public function slider_resim($id)
+    {
+        $config['upload_path']  = "uploads/sliders/";
+        $config['allowed_types']= 'gif|jpg|png';
+        $config['max_size']     = 3000;
+        $config['max_width']    = 3000;
+        $config['max_height']   = 3000;
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('slider_image'))
+        {
+            $img_data=$this->upload->data();
+            $this->load->model("Database_Model");
+            $data=array(
+                'image'=>$img_data['raw_name'].$img_data['file_ext']
+            );
+            $this->Database_Model->update_data("sliders",$data,$id);
+            $this->session->set_flashdata("success","Resim güncellendi");
+            redirect(base_url()."admin/urunler/slider_duzenle/".$id);
+        }
+        else
+        {
+            echo $this->upload->display_errors();
+
+        }
+    }
+    public function slider_ekle()
+    {
+        $query=$this->db->query("SELECT id,name FROM products");
+        $data["urunler"]=$query->result();
+        $this->load->view('admin/_header');
+        $this->load->view('admin/_sidebar');
+        $this->load->view("admin/slider_ekle",$data);
+        $this->load->view('admin/_footer');
+    }
+    public function slider_ekle_kayit()
+    {
+        $data=array(
+            'product_id'=>$this->input->post("product"),
+            'status'=>$this->input->post("status"),
+            'image'=>"default.png"
+        );
+        if($this->db->insert("sliders",$data))
+        {
+            $this->session->set_flashdata("success","Slider eklendi");
+            redirect(base_url()."admin/urunler/slider");
         }
     }
 

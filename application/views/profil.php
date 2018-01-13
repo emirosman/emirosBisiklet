@@ -82,7 +82,7 @@
                 <div class="card-body">
                     <form class="form-horizontal" action="<?=base_url()."uye/resim_guncelle"?>" method="post" enctype="multipart/form-data" >
                         <div class="form-group row">
-                            <img class="rounded-circle col-sm-5 " height="200px" src="<?=base_url()."uploads/users/".$uye[0]->image?>">
+                            <img class=" col-sm-5 " height="200px" src="<?=base_url()."uploads/users/".$uye[0]->image?>">
                             <div class="col-sm-7">
                                 <h4>Resim Seçin:</h4>
                                 <div><input type="file" name="user_image" accept=".jpg, .jpeg, .png" /></div><br>

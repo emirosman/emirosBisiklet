@@ -2,7 +2,7 @@
     <!-- Page Header-->
     <header class="page-header">
         <div class="container-fluid row">
-            <h2 class="col-8">Kategoriler</h2>
+            <h2 class="col-8">Slider</h2>
             <?=($this->session->flashdata("success")==null)?"": "<label class='text-success col-sm-8'>".$this->session->flashdata("success")."</label>"?>
         </div>
     </header>
@@ -10,16 +10,15 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
+                <h5><a href="<?=base_url()."admin/urunler/slider_ekle"?>"><span class="fa fa-plus"></span>Slider Ekle</a></h5>
                 <table class="table table-striped table-responsive table-bordered" >
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>ID</th>
                         <th>Durum</th>
-                        <th>Cevap</th>
-                        <th>isim</th>
-                        <th>Konu</th>
-                        <th>Mesaj</th>
+                        <th>Ürün</th>
+                        <th>Resim</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -27,20 +26,18 @@
                     <tbody>
                     <?php
                     $count=1;
-                    foreach ($veri as $message){?>
+                    foreach ($sliders as $slider){?>
                     <tr>
                         <th scope="row"><?=$count++?></th>
-                        <td><?=$message->id;?></td>
-                        <td><center><?=($message->status=="unread")?"<i class='fa fa-envelope'>":"<i class='fa fa-envelope-open-o'>";?></center></td>
-                        <td><center><?=($message->answer=="not answer")?"<i class='fa fa-close'>":"<i class='fa fa-check'>";?></center></td>
-                        <td><?=$message->username;?></td>
-                        <td><?=$message->subject;?></td>
-                        <td><?=(strlen($message->message)>120)?substr($message->message,0,120)."...":$message->message;?></td>
+                        <td><?=$slider->id;?></td>
+                        <td><?=($slider->status==1)?"Aktif":"Pasif";?></td>
+                        <td><?=$slider->name;?></td>
+                        <td><img style="height: 70px" src="<?=base_url()."uploads/sliders/".$slider->image?>"></td>
                         <td>
-                            <a href="<?=base_url()."admin/mesajlar/mesaj_oku/".$message->id?>" class="btn btn-outline-warning btn-sm">Oku</a>
+                            <a href="<?=base_url()."admin/urunler/slider_duzenle/".$slider->id?>" class="btn btn-outline-warning btn-sm">Düzenle</a>
                         </td>
                         <td>
-                            <a href="<?=base_url()."admin/mesajlar/mesaj_sil/".$message->id?>" onclick="return confirm('are you sure')" class="btn btn-outline-danger btn-sm">Sil</a>
+                            <a href="<?=base_url()."admin/urunler/slider_sil/".$slider->id?>" onclick="return confirm('Slider silinecek emin misiniz?')" class="btn btn-outline-danger btn-sm">Sil</a>
                         </td>
                     </tr>
                     <?php  } ?>

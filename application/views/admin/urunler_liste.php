@@ -53,7 +53,7 @@
                             <a href="<?=base_url()."admin/urunler/urun_duzenle/".$p_row->id?>" class="btn btn-outline-warning btn-sm">Düzenle</a>
                         </td>
                         <td>
-                            <a href="<?=base_url()."admin/urunler/urun_sil/".$p_row->id?>" onclick="return confirm('are you sure')" class="btn btn-outline-danger btn-sm">Sil</a>
+                            <a href="<?=base_url()."admin/urunler/urun_sil/".$p_row->id?>" onclick="return confirm('Ürün silinecek emin misiniz?')" class="btn btn-outline-danger btn-sm">Sil</a>
                         </td>
                     </tr>
                     <?php  } ?>

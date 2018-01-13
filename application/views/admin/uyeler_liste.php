@@ -54,7 +54,7 @@
                             <a href="<?=base_url()."admin/uyeler/uye_duzenle/".$user_row->id?>" class="btn btn-outline-warning btn-sm">Düzenle</a>
                         </td>
                         <td>
-                            <a href="<?=base_url()."admin/uyeler/uye_sil/".$user_row->id?>" onclick="return confirm('are you sure')" class="btn btn-outline-danger btn-sm">Sil</a>
+                            <a href="<?=base_url()."admin/uyeler/uye_sil/".$user_row->id?>" onclick="return confirm('Üye silinecek emin misiniz?')" class="btn btn-outline-danger btn-sm">Sil</a>
                         </td>
                     </tr>
                     <?php  } ?>

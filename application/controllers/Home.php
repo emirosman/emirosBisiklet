@@ -12,15 +12,23 @@ class Home extends CI_Controller
 
     public function index()
     {
+        $this->load->model("Database_Model");
+        $data["sliders"]=$this->Database_Model->get_show_sliders();
         $query = $this->db->query("SELECT * FROM settings");
+        $query2 = $this->db->query("SELECT * FROM products ORDER BY RAND() LIMIT 6 ");
+        $query3 = $this->db->query("SELECT * FROM products ORDER BY id DESC LIMIT 6 ");
+        $data["cats"] = $this->Database_Model->get_categories();
+        $data["urunler"]= $query2->result();
+        $data["son"]= $query3->result();
         $data['veri'] = $query->result();
         $data['sayfa'] = "";
+        $data['menu']="ana";
 
 
         $this->load->view('_header', $data);
-        $this->load->view('_slider');
+        $this->load->view('_slider',$data);
         $this->load->view('_sidebar', $data);
-        $this->load->view('_content');
+        $this->load->view('_content',$data);
         $this->load->view('_footer');
     }
 
@@ -29,6 +37,9 @@ class Home extends CI_Controller
         $query = $this->db->query("SELECT * FROM settings");
         $data['veri'] = $query->result();
         $data['sayfa'] = "Hakkımızda";
+        $data['menu']="hakkımızda";
+        $this->load->model("Database_Model");
+        $data["cats"] = $this->Database_Model->get_categories();
 
         $this->load->view('_header', $data);
         $this->load->view('_sidebar');
@@ -38,14 +49,32 @@ class Home extends CI_Controller
 
     public function iletisim()
     {
+        $this->load->model("Database_Model");
         $query = $this->db->query("SELECT * FROM settings");
         $data['veri'] = $query->result();
         $data['sayfa'] = "İletişim";
+        $data['menu']="iletişim";
+        $data["cats"] = $this->Database_Model->get_categories();
 
 
         $this->load->view('_header', $data);
         $this->load->view('_sidebar');
         $this->load->view('iletisim', $data);
+        $this->load->view('_footer');
+    }
+    public function bize_yazin()
+    {
+        $this->load->model("Database_Model");
+        $query = $this->db->query("SELECT * FROM settings");
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "İletişim";
+        $data['menu']="bizeyazın";
+        $data["cats"] = $this->Database_Model->get_categories();
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('_sidebar');
+        $this->load->view('bize_yazin', $data);
         $this->load->view('_footer');
     }
 
@@ -63,14 +92,8 @@ class Home extends CI_Controller
         );
         if ($this->db->insert('messages', $data)) {
             $this->session->set_flashdata("success", "Mesajınız Gönderildi..");
-            redirect(base_url() . "home/iletisim");
+            redirect(base_url() . "home/bize_yazin");
         }
-        echo $data['username'] . "<br>";
-        echo $data['email'] . "<br>";
-        echo $data['subject'] . "<br>";
-        echo $data['message'] . "<br>";
-        echo $data['time'] . "<br>";
-        echo $data['ip'] . "<br>";
 
     }
 
@@ -79,6 +102,7 @@ class Home extends CI_Controller
         $query = $this->db->query("SELECT * FROM settings");
         $data['veri'] = $query->result();
         $data['sayfa'] = "Üye Giriş Sayfası";
+        $data['menu']="login";
 
         $this->load->view('_header', $data);
         $this->load->view('login');
@@ -164,6 +188,43 @@ class Home extends CI_Controller
             }
         }
 
+    }
+    public function urun_detay($id)
+    {
+        $this->load->model("Database_Model");
+        $query = $this->db->query("SELECT * FROM settings");
+        $data["comments"]=$this->Database_Model->get_comments($id);
+        $data["cats"] = $this->Database_Model->get_categories();
+        $data['veri'] =$this->Database_Model->get_urun($id);
+        $data['resimler']=$this->Database_Model->get_urun_galeri($id);
+        $data['sayfa'] = "";
+        $data['menu']="";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('_sidebar', $data);
+        $this->load->view('urun_detay',$data);
+        $this->load->view('_footer');
+    }
+    public function test()
+    {
+        $this->load->model("Database_Model");
+        $data = $this->Database_Model->get_categories();
+        $this->rec($data,0);
+        exit();
+
+        foreach ($data as $bir)
+        {
+           echo $bir->name."<br>";
+           foreach ($bir->sub as $iki)
+           {
+               echo "--$iki->name.<br>";
+               foreach ($iki->sub as $uc)
+               {
+                   echo "----$uc->name.<br>";
+               }
+           }
+        }
     }
 
 }

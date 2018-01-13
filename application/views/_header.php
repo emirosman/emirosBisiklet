@@ -14,16 +14,21 @@
     <link href="<?= base_url()?>assets/css/animate.css" rel="stylesheet">
     <link href="<?= base_url()?>assets/css/main.css" rel="stylesheet">
     <link href="<?= base_url()?>assets/css/responsive.css" rel="stylesheet">
+    <script src="<?= base_url()?>/assets/js/jquery.js"></script>
+    <script src="<?= base_url()?>/assets/owlcarousel/owl.carousel.min.js"></script>
     <!--[if lt IE 9]>
     <script src="<?= base_url()?>/assets/js/html5shiv.js"></script>
     <script src="<?= base_url()?>/assets/js/respond.min.js"></script>
+
     <![endif]-->
 
-    <link rel="shortcut icon" href="<?=base_url()?>/assets/admin/img/bisiklet_logo.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= base_url()?>/assets/images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= base_url()?>/assets/images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= base_url()?>/assets/images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="<?= base_url()?>/assets/images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="<?=base_url()?>assets/admin/img/bisiklet_logo.png">
+    <link rel="stylesheet" href="<?=base_url()?>assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= base_url()?>assets/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= base_url()?>assets/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= base_url()?>assets/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<?= base_url()?>assets/images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 
 <body>
@@ -63,12 +68,12 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <?php if($this->session->user_sess){?>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Sepetim</a></li>
-                                <li><a href="<?=base_url()."uye/profil"?>"><i class="fa fa-user"></i> <?= $this->session->user_sess["username"]?></a></li>
+                                <li><a class="<?=($menu=="sepet")?"active":""?>" href="<?=base_url()."uye/sepetim"?>"><i class="fa fa-shopping-cart"></i> Sepetim</a></li>
+                                <li><a class="<?=($menu=="profil")?"active":""?>" href="<?=base_url()."uye/profil"?>"><i class="fa fa-user"></i> <?= $this->session->user_sess["username"]?></a></li>
                                 <li><a href="<?=base_url()."home/logout"?>"><i class="fa fa-sign-out"></i>çıkış yap </a></li>
                             <?php } else{?>
-                                <li>  <a href="<?=base_url()."home/login"?>"><i class="fa fa-lock"></i> Giriş Yap</button></a></li>
-                                <li>  <a href="<?=base_url()."home/login"?>"><i class="fa fa-user"></i> Üye Ol</button></a></li>
+                                <li>  <a class="<?=($menu=="login")?"active":""?>" href="<?=base_url()."home/login"?>"><i class="fa fa-lock"></i> Giriş Yap</button></a></li>
+                                <li>  <a class="<?=($menu=="login")?"active":""?>" href="<?=base_url()."home/login"?>"><i class="fa fa-user"></i> Üye Ol</button></a></li>
                                 <label style="color:;"
                             <?php } ?>
 
@@ -93,18 +98,10 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="<?=base_url()?>">Ana Sayfa</a></li>
-                            <li class="dropdown"><a href="<?=base_url()."home/kategoriler"?>">Kategoriler<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="<?=base_url()."home/kategoriler"?>>Products</a></li>
-                                    <li><a href="<?=base_url()."home/kategoriler"?>">Product Details</a></li>
-                                    <li><a href="<?=base_url()."home/kategoriler"?>">Checkout</a></li>
-                                    <li><a href="<?=base_url()."home/kategoriler"?>">Cart</a></li>
-                                    <li><a href="<?=base_url()."home/kategoriler"?>">Login</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="<?=base_url()."home/hakkimizda"?>">Hakkımızda<i class="fa fa-angle-down"></i></a></li>
-                            <li><a href="<?=base_url()."home/iletisim"?>">İletişim</a></li>
+                            <li><a class="<?=($menu=="ana")?"active":""?>" href="<?=base_url()?>">Ana Sayfa</a></li>
+                            <li><a class="<?=($menu=="hakkımızda")?"active":""?>" href="<?=base_url()."home/hakkimizda"?>">Hakkımızda</a></li>
+                            <li><a class="<?=($menu=="bizeyazın")?"active":""?>" href="<?=base_url()."home/bize_yazin"?>">Bize Yazın</a></li>
+                            <li><a class="<?=($menu=="iletişim")?"active":""?>" href="<?=base_url()."home/iletisim"?>">İletişim</a></li>
                         </ul>
                     </div>
                 </div>

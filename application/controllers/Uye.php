@@ -24,6 +24,7 @@ class Uye extends CI_Controller {
         $data["uye"] = $query2->result();
         $data['veri'] = $query->result();
         $data['sayfa'] = "Profil";
+        $data['menu']="profil";
 
 
         $this->load->view('_header', $data);
@@ -130,4 +131,204 @@ class Uye extends CI_Controller {
             redirect(base_url()."uye/profil/".$user_id);
         }
     }
+
+    public function sepet_ekle($id)
+    {
+        $this->load->model("Database_Model");
+        $data=array(
+            'user_id'=>$this->session->user_sess["id"],
+            'product_id'=>$id,
+            'piece'=> ($this->input->post("piece")==Null)?1:$this->input->post("piece"),
+            'date'=>date("Y-m-d h:i:s")
+        );
+        $query=$this->db->query("SELECT id, piece FROM basket WHERE product_id=$id AND user_id=".$this->session->user_sess['id']);
+        $sepet=$query->result();
+
+        if( count($sepet) > 0)
+        {
+            $sepet_id=(int)$sepet[0]->id;
+            $data['piece']+=$sepet[0]->piece;
+            $this->Database_Model->update_data("basket",$data,$sepet_id);
+
+        }else {
+            $this->db->insert("basket",$data);
+        }
+        $this->session->set_flashdata("success","Ürün sepete eklendi");
+        redirect(base_url()."home/urun_detay/".$id);
+    }
+    public function sepetim()
+    {
+        $id=$this->session->user_sess["id"];
+        $this->load->model("Database_Model");
+        $query = $this->db->query("SELECT * FROM settings");
+        $data['veri'] = $query->result();
+        $data['menu']="sepet";
+        $data['sayfa'] = "Sepetim";
+        $data['sepet'] = $this->Database_Model->get_sepet_urunler($id);
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('sepetim',$data);
+        $this->load->view('_footer');
+    }
+    public function siparis_tamamla()
+    {
+        $id=$this->session->user_sess["id"];
+        $this->load->model("Database_Model");
+        $query = $this->db->query("SELECT * FROM settings");
+        $query2 = $this->db->query("SELECT * FROM address WHERE user_id=$id");
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "Sipariş";
+        $data['menu']="profil";
+        $data['address'] =$query2->result();
+        $data['total']=$this->Database_Model->get_sepet_total($id);
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('siparis_tamamla',$data);
+        $this->load->view('_footer');
+    }
+    public function siparis_kayit()
+    {
+        $this->load->model("Database_Model");
+        $user_id=$this->session->user_sess["id"];
+        $data=array(                                //orderr tablosu doldur
+            'user_id'=>$user_id,
+            'date'=> date("Y-m-d h:i:s"),
+            'ip'=>$_SERVER['REMOTE_ADDR'],
+            'total'=>(double)$this->input->post('total'),
+            'pay_type'=>$this->input->post('pay_type'),
+            'order_status'=>"Yeni",
+            'address'=>$this->input->post('address'),
+            'phone'=>$this->input->post('phone'),
+            'name_surname'=>$this->input->post('name_surname')
+        );
+        $this->db->insert("orderr",$data);          //orderr
+        $order_id=$this->db->insert_id();
+        $sepet=$this->Database_Model->get_sepet_urunler($user_id);      //order_product için ürünleri çek insertle
+        foreach ($sepet as $urun)
+        {
+            $data2=array(
+                'user_id'=>$user_id,
+                'product_id'=>$urun->id,
+                'order_id'=>$order_id,
+                'piece'=>$urun->piece,
+                'price'=>$urun->s_price,
+                'date'=>date("Y-m-d h:i:s"),
+                'name'=>$urun->name,
+                'total'=>(double)$this->input->post('total')
+            );
+            $this->db->insert("order_product",$data2);
+            $stock['stock']=$urun->stock-$urun->piece;      //satın alınan ürünleri stoktan düş
+            $this->Database_Model->update_data("products",$stock,$urun->id);
+        }
+        $this->db->query("DELETE FROM basket WHERE user_id=$user_id");      //üyenin sepetini boşalt
+        //sipariş alındı maili gönder
+        $this->session->set_flashdata("success","Siparişiniz işleme alındı");
+        redirect(base_url()."uye/siparislerim");
+    }
+
+    public function siparislerim()
+    {
+        $id=$this->session->user_sess["id"];
+        $query = $this->db->query("SELECT * FROM settings");
+        $query2=$this->db->query("select * from orderr where user_id=$id");
+        $data["siparisler"]=$query2->result();
+        $data['veri'] = $query->result();
+        $data['menu']="profil";
+        $data['sayfa'] = "Siparişlerim";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('siparislerim',$data);
+        $this->load->view('_footer');
+    }
+    public function yorum_yap($id)
+    {
+        $data=array(
+            'user_id'=>$this->session->user_sess["id"],
+            'product_id'=>$id,
+            'comment'=>$this->input->post("comment"),
+            'date'=>date("Y-m-d h:i:s")
+        );
+        $this->db->insert("comments",$data);
+        $this->session->set_flashdata("success","Yorumunuz eklendi");
+        redirect(base_url()."home/urun_detay/".$id);
+    }
+    public function yorumlarim()
+    {
+        $id=$this->session->user_sess["id"];
+        $query = $this->db->query("SELECT * FROM settings");
+        $this->load->model("Database_Model");
+        $data["yorumlar"]=$this->Database_Model->get_yorumlarim($id);
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "Yorumlarım";
+        $data['menu']="profil";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('yorumlarim',$data);
+        $this->load->view('_footer');
+    }
+    public function yorum_sil($id)
+    {
+        $this->db->query("Delete from comments where id=$id");
+        $this->session->set_flashdata("success","Yorumunuz silindi");
+        redirect(base_url()."uye/yorumlarim");
+    }
+    public function sepet_urun_sil($id)
+    {
+        $this->db->query("DELETE FROM basket WHERE product_id=$id");
+        $this->session->set_flashdata("success","Ürün sepetinizden silindi");
+        redirect(base_url()."uye/sepetim");
+    }
+    public function fav_ekle($p_id)
+    {
+        $user_id=$this->session->user_sess["id"];
+        $data=array(
+            'user_id'      =>$user_id,
+            'product_id'   =>$p_id
+        );
+        $query=$this->db->query("SELECT * FROM fav WHERE product_id=$p_id AND user_id=$user_id");
+        $control=$query->result();
+        if($control==null)
+        {
+            $this->db->insert("fav",$data);
+            $this->session->set_flashdata("success","Ürün favorilere eklendi");
+        }
+        else{
+            $this->session->set_flashdata("success","Ürün zaten favorilerinizde");
+        }
+        redirect(base_url()."home/urun_detay/".$p_id);
+    }
+    public function fav_sil($p_id)
+    {
+        $user_id=$this->session->user_sess["id"];
+
+        $this->db->query("DELETE FROM fav WHERE user_id=$user_id AND product_id=$p_id");
+        $this->session->set_flashdata("success","Ürün favorilerden silindi");
+        redirect(base_url()."uye/favorilerim");
+    }
+    public function favorilerim()
+    {
+        $user_id=$this->session->user_sess["id"];
+        $this->load->model("Database_Model");
+        $data['favoriler']=$this->Database_Model->get_favori_urunler($user_id);
+
+        $query= $this->db->query("SELECT * FROM settings");
+        $data['veri']       = $query->result();
+        $data['menu']       = "profil";
+        $data['sayfa']      = "Favorilerim";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('favorilerim',$data);
+        $this->load->view('_footer');
+
+    }
+
 }

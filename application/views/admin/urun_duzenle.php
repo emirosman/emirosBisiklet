@@ -3,6 +3,8 @@
     <header class="page-header">
         <div class="container-fluid row">
             <h2 class="col-8">Ürün Düzenle Formu</h2>
+            <?=($this->session->flashdata("success")==null)?"": "<label class='text-success col-sm-8'>".$this->session->flashdata("success")."</label>"?>
+
         </div>
     </header>
     <!--Form Başlangıç-->
