@@ -52,6 +52,7 @@
                 </div><!--/product-information-->
             </div>
         </form>
+
     </div><!--/product-details-->
 
     <div class="category-tab shop-details-tab"><!--category-tab-->
