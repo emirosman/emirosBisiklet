@@ -194,14 +194,14 @@ class Uye extends CI_Controller {
         $this->load->model("Database_Model");
         $user_id=$this->session->user_sess["id"];
         $data=array(                                //orderr tablosu doldur
-            'user_id'=>$user_id,
-            'date'=> date("Y-m-d h:i:s"),
-            'ip'=>$_SERVER['REMOTE_ADDR'],
-            'total'=>(double)$this->input->post('total'),
-            'pay_type'=>$this->input->post('pay_type'),
+            'user_id'   =>$user_id,
+            'date'      => date("Y-m-d h:i:s"),
+            'ip'        =>$_SERVER['REMOTE_ADDR'],
+            'total'     =>(double)$this->input->post('total'),
+            'pay_type'  =>$this->input->post('pay_type'),
             'order_status'=>"Yeni",
-            'address'=>$this->input->post('address'),
-            'phone'=>$this->input->post('phone'),
+            'address'   =>$this->input->post('address'),
+            'phone'     =>$this->input->post('phone'),
             'name_surname'=>$this->input->post('name_surname')
         );
         $this->db->insert("orderr",$data);          //orderr
@@ -210,14 +210,14 @@ class Uye extends CI_Controller {
         foreach ($sepet as $urun)
         {
             $data2=array(
-                'user_id'=>$user_id,
-                'product_id'=>$urun->id,
-                'order_id'=>$order_id,
-                'piece'=>$urun->piece,
-                'price'=>$urun->s_price,
-                'date'=>date("Y-m-d h:i:s"),
-                'name'=>$urun->name,
-                'total'=>(double)$this->input->post('total')
+                'user_id'   => $user_id,
+                'product_id'=> $urun->id,
+                'order_id'  => $order_id,
+                'piece'     => $urun->piece,
+                'price'     => $urun->s_price,
+                'date'      => date("Y-m-d h:i:s"),
+                'name'      => $urun->name,
+                'total'     => (double)$this->input->post('total')
             );
             $this->db->insert("order_product",$data2);
             $stock['stock']=$urun->stock-$urun->piece;      //satın alınan ürünleri stoktan düş
@@ -279,6 +279,21 @@ class Uye extends CI_Controller {
         $this->session->set_flashdata("success","Yorumunuz silindi");
         redirect(base_url()."uye/yorumlarim");
     }
+    public function yorum_detay($id)
+    {
+        $query = $this->db->query("SELECT * FROM settings");
+        $this->load->model("Database_Model");
+        $data["yorum"]=$this->Database_Model->get_yorum($id);
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "yorum_detay";
+        $data['menu']="profil";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('yorum_detay',$data);
+        $this->load->view('_footer');
+    }
     public function sepet_urun_sil($id)
     {
         $this->db->query("DELETE FROM basket WHERE product_id=$id");
@@ -328,7 +343,26 @@ class Uye extends CI_Controller {
         $this->load->view('uye_sidebar', $data);
         $this->load->view('favorilerim',$data);
         $this->load->view('_footer');
+    }
+    public function siparis_sil($id)
+    {
+        $this->load->model("Database_Model");
+        $query=$this->db->query("SELECT order_status FROM orderr where id=$id");
+        $result=$query->result();
+        if($result[0]->order_status=="Yeni")
+        {
+            $this->Database_Model->siparis_iptal_urun_ekle($id);
+            $this->db->query("DELETE FROM orderr where id=$id");
+            $this->session->set_flashdata("success","Siparişiniz iptal edildi");
+            redirect(base_url()."uye/siparislerim");
+        }
 
+    }
+
+    public function test()
+    {
+        $this->load->model("Database_Model");
+        $data=$this->Database_Model->siparis_iptal_urun_ekle(23);
     }
 
 }

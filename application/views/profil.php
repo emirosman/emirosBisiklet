@@ -113,7 +113,7 @@
                             </div>
                             <div class="col-sm-1 row">
                                 <div class="col-sm-12">
-                                    <button type="submit" class=" btn btn-sm btn-warning">Güncelle</button>
+                                    <button style="margin-bottom: 5px;margin-top: 2px" type="submit" class=" btn btn-sm btn-warning">Güncelle</button>
                                 </div>
                                 <div class="col-sm-12">
                                     <a href="<?=base_url()."uye/adres_sil/".$rsad->id."/".$rsad->user_id?>" class=" btn btn-sm btn-danger">sil</a>
@@ -132,7 +132,7 @@
                             <textarea name="address" class="form-control" rows="3" cols="30" placeholder="Yeni Adres..."></textarea>
                         </div>
                         <div class="col-sm-1">
-                            <button type="submit" class=" btn btn-sm btn-success">Ekle</button>
+                            <button style="margin-top: 3px" type="submit" class=" btn btn-sm btn-success">Ekle</button>
                         </div>
                     </div>
                 </form>

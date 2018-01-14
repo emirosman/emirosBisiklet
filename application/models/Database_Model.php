@@ -185,16 +185,16 @@ class Database_Model extends CI_Model {
         }
         return $categories;
     }
-    public function get_comments($id)
+    public function get_comments($id)//ürüne ait yorumlar
     {
         $query=$this->db->query("select u.username,comments.comment,comments.date from  comments
         inner join users as u on u.id=comments.user_id
-        WHERE comments.product_id=$id
+        WHERE comments.product_id=$id ORDER BY comments.date DESC 
         ");
 
         return $query->result();
     }
-    public function get_yorumlarim($id)
+    public function get_yorumlarim($id)//profil>yorumlarım sayfası
     {
         $query=$this->db->query("select p.name as p_name,comments.id,comments.comment,comments.date from  comments
         inner join products as p on p.id=comments.product_id
@@ -202,6 +202,30 @@ class Database_Model extends CI_Model {
         ");
 
         return $query->result();
+    }
+    public function get_yorum($id)//profil>yorum_detay sayfası
+    {
+        $query=$this->db->query("select p.name as p_name,comments.id,comments.comment,comments.date from  comments
+        inner join products as p on p.id=comments.product_id
+        WHERE comments.id=$id
+        ");
+
+        return $query->result();
+    }
+    public function siparis_iptal_urun_ekle($id)
+    {
+        $query=$this->db->query("select order_product.id,order_product.product_id,order_product.piece FROM order_product
+        inner join orderr on orderr.id=order_product.order_id WHERE orderr.id=$id");//order_product ta siparişe ait ürünleri getirdi
+        $op = $query->result();
+        foreach ($op as $rs)
+        {
+            $query2=$this->db->query("SELECT stock FROM products WHERE id=$rs->product_id");
+            $p=$query2->result();
+            $update=array(
+                'stock'=> ($rs->piece + $p[0]->stock)
+            );
+            $this->update_data("products",$update,$rs->product_id);
+        }
     }
 
 }

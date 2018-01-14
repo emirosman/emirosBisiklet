@@ -38,7 +38,7 @@
                                 </div>
                             </td>
                             <td class="cart_delete">
-                                <a class="btn btn-warning"> Detay</a>
+                                <a class="btn btn-warning" href="<?=base_url()."uye/yorum_detay/".$yorum->id?>">Detay</a>
                                 <a class="cart_quantity_delete" onclick="return confirm('Yorumunuz silinecek emin misiniz?')" href="<?=base_url()?>uye/yorum_sil/<?=$yorum->id?>"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>

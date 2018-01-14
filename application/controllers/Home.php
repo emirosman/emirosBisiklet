@@ -210,8 +210,6 @@ class Home extends CI_Controller
     {
         $this->load->model("Database_Model");
         $data = $this->Database_Model->get_categories();
-        $this->rec($data,0);
-        exit();
 
         foreach ($data as $bir)
         {

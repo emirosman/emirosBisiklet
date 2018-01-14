@@ -1,5 +1,6 @@
 <!--Content-->
 <div class="col-sm-10 padding-right">
+    <center><b class="text-success"><?=$this->session->flashdata("success")?></b></center>
     <?php if(count($siparisler)>0) {?>
     <div id="cart_items">
         <div class="container col-sm-12">
@@ -38,7 +39,7 @@
                             <td class="cart_delete">
                                 <a class="btn btn-warning"> Detay</a>
                                 <?php if($siparis->order_status=="Yeni"){?>
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                <a class="cart_quantity_delete" href="<?=base_url()."uye/siparis_sil/"."$siparis->id"?>"><i class="fa fa-times"></i></a>
                                 <?php } ?>
                             </td>
                         </tr>
