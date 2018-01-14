@@ -229,7 +229,7 @@ class Uye extends CI_Controller {
         redirect(base_url()."uye/siparislerim");
     }
 
-    public function siparislerim()
+    public function  siparislerim()
     {
         $id=$this->session->user_sess["id"];
         $query = $this->db->query("SELECT * FROM settings");
