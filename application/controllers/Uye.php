@@ -358,6 +358,61 @@ class Uye extends CI_Controller {
         }
 
     }
+    public function mesajlarim()
+    {
+        $id=$this->session->user_sess["id"];
+        $query = $this->db->query("SELECT * FROM settings");
+        $this->load->model("Database_Model");
+        $data["mesajlar"]=$this->Database_Model->get_mesajlarim($id);
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "Mesajlarım";
+        $data['menu']="profil";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('mesajlarim',$data);
+        $this->load->view('_footer');
+    }
+    public function mesaj_detay($id)
+    {
+        $query = $this->db->query("SELECT * FROM settings");
+        $this->load->model("Database_Model");
+        $data["mesaj"]=$this->Database_Model->get_mesaj($id);
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "Mesajlarım";
+        $data['menu']="profil";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('mesaj_detay',$data);
+        $this->load->view('_footer');
+    }
+
+    public function mesaj_sil($id)
+    {
+        if($this->db->query("DELETE FROM messages WHERE id='$id'"))
+        {
+            $this->session->set_flashdata("success","Mesaj Silindi!");
+            redirect(base_url()."uye/mesajlarim/");
+        }
+    }
+    public function siparis_detay($id)
+    {
+        $this->load->model("Database_Model");
+        $query = $this->db->query("SELECT * FROM settings");
+        $data['veri'] = $query->result();
+        $data['menu']="sepet";
+        $data['sayfa'] = "Siparişlerim";
+        $data['siparisler'] = $this->Database_Model->get_siparis_urunler($id);
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('uye_sidebar', $data);
+        $this->load->view('siparis_detay',$data);
+        $this->load->view('_footer');
+    }
 
     public function test()
     {

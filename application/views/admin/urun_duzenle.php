@@ -55,6 +55,18 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Meta Açıklama</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="meta_description" value="<?=$urun[0]->meta_description?>" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Anahtar Kelimeler</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="meta_keywords" value="<?=$urun[0]->meta_keywords?>" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Açıklama</label>
                             <div class="col-sm-9">
                                 <textarea name="editor1" id="editor1"  class="form-control"><?=$urun[0]->description?></textarea>

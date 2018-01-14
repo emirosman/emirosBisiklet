@@ -22,7 +22,7 @@
 
     <![endif]-->
 
-    <link rel="shortcut icon" href="<?=base_url()?>assets/admin/img/bisiklet_logo.png">
+    <link rel="shortcut icon" href="<?=base_url()?>assets/images/home/bisiklet_logo_t.png">
     <link rel="stylesheet" href="<?=base_url()?>assets/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/owlcarousel/assets/owl.theme.default.min.css">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= base_url()?>assets/images/ico/apple-touch-icon-144-precomposed.png">
@@ -38,30 +38,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="<?=base_url()?>"><img src="<?= base_url()?>/assets/images/home/logo.png" alt="" /></a>
-                    </div>
-                    <div class="btn-group pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                USA
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="">Canada</a></li>
-                                <li><a href="">UK</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                DOLLAR
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="">Canadian Dollar</a></li>
-                                <li><a href="">Pound</a></li>
-                            </ul>
-                        </div>
+                        <a href="<?=base_url()?>"><img style="height: 60px " src="<?= base_url()?>/assets/images/home/logo2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -99,6 +76,7 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a class="<?=($menu=="ana")?"active":""?>" href="<?=base_url()?>">Ana Sayfa</a></li>
+                            <li><a class="<?=($menu=="kampanya")?"active":""?>" href="<?=base_url()."home/kampanya"?>">Kampanya</a></li>
                             <li><a class="<?=($menu=="hakkımızda")?"active":""?>" href="<?=base_url()."home/hakkimizda"?>">Hakkımızda</a></li>
                             <li><a class="<?=($menu=="bizeyazın")?"active":""?>" href="<?=base_url()."home/bize_yazin"?>">Bize Yazın</a></li>
                             <li><a class="<?=($menu=="iletişim")?"active":""?>" href="<?=base_url()."home/iletisim"?>">İletişim</a></li>
@@ -106,9 +84,11 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
+                    <form action="<?=base_url()."home/urun_ara"?>" method="post">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search"/>
+                        <input name="ara" type="text" placeholder="Search"/>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

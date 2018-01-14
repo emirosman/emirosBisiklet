@@ -45,6 +45,8 @@ class Urunler extends CI_Controller {
             'b_price'=>$this->input->post("b_price"),
             'preview_img'=>"default_product.png",
             'stock'=>$this->input->post("stock"),
+            'meta_description'=>$this->input->post("meta_description"),
+            'meta_keywords'=>$this->input->post("meta_keywords"),
             'description'=>$this->input->post("editor1"),
             'create_time'=>date("Y-m-d h:i:s"),
             'update_time'=>date("Y-m-d h:i:s")
@@ -82,6 +84,8 @@ class Urunler extends CI_Controller {
             'b_price'=>$this->input->post("b_price"),
             's_price'=>$this->input->post("s_price"),
             'stock'=>$this->input->post("stock"),
+            'meta_description'=>$this->input->post("meta_description"),
+            'meta_keywords'=>$this->input->post("meta_keywords"),
             'description'=>$this->input->post("editor1")
         );
         $this->Database_Model->update_data("products",$data,$id);

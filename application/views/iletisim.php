@@ -11,22 +11,24 @@
         </div>
         </center>
     </div><br><br>
+    <div class="contact-info">
     <div class="social-networks">
         <h2 class="title text-center">Sosyal Medyada Biz</h2>
         <ul>
             <li>
-                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="https://facebook.com/<?=$veri[0]->facebook?>"><i class="fa fa-facebook"></i></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="https://twitter.com/<?=$veri[0]->twitter?>"><i class="fa fa-twitter"></i></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="https://instagram.com/<?=$veri[0]->instagram?>"><i class="fa fa-instagram"></i></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-pinterest"></i></a>
+                <a href="https://tr.pinterest.com/<?=$veri[0]->pinterest?>"><i class="fa fa-pinterest"></i></a>
             </li>
         </ul>
+    </div>
     </div>
 </div>
 </div>

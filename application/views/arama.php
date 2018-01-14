@@ -1,7 +1,7 @@
 <!--Content-->
 <div class="col-sm-9 padding-right">
     <div class="features_items"><!--features_items-->
-        <h2 class="title text-center">Ürünler</h2>
+        <h2 class="title text-center">Önerilen Ürünler</h2>
         <?php
         $i=0;
         foreach ($urunler as $urun) { ?>
@@ -33,7 +33,7 @@
         <?php } ?>
     </div><!--features_items-->
 
-
+    
 
     <!--Son eklenenler-->
     <div class="recommended_items"><!--recommended_items-->

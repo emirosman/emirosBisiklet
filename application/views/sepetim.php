@@ -1,5 +1,6 @@
 <!--Content-->
 <div class="col-sm-10 padding-right">
+    <h2 class="title text-center">Sepetim</h2>
    <center><b class="text-success"><?=$this->session->flashdata("success")?></b></center>
     <?php if(count($sepet)>0) {?>
     <div id="cart_items">

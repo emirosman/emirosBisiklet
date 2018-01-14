@@ -35,13 +35,31 @@ class Database_Model extends CI_Model {
         $this->db->where('id',$id);
         $this->db->update($tablo,$data);
     }
-
     public function get_urunler()
     {
-        $query=$this->db->query("SELECT products.*, category.name as cat_name 
+        $query=$this->db->query("SELECT products.*, category.name as cat_name , category.id as cat_id
         FROM products
         INNER JOIN category ON products.cat_id=category.id
         ORDER BY id
+        ");
+
+        return $query->result();
+    }
+    public function urun_ara($name)
+    {
+        $query=$this->db->query("select * from products
+        where name LIKE '%$name%'
+        ");
+
+        return $query->result();
+    }
+
+    public function get_kategori_urunler($id)
+    {
+        $query=$this->db->query("SELECT products.*, category.name as cat_name , category.id as cat_id
+        FROM products
+        INNER JOIN category ON products.cat_id=category.id
+        WHERE category.id=$id
         ");
 
         return $query->result();
@@ -77,7 +95,6 @@ class Database_Model extends CI_Model {
         $query=$this->db->query("SELECT * FROM p_gallery WHERE p_id=$id");
         return $query->result();
     }
-
     public function get_kategoriler()
     {
         $query=$this->db->query("SELECT A.*,B.name AS p_cat_name FROM category A
@@ -87,7 +104,6 @@ class Database_Model extends CI_Model {
 
         return $query->result();
     }
-
     public function kayit_kontrol($data,$pass2)
     {
         $c=array(0,0,0);
@@ -151,7 +167,6 @@ class Database_Model extends CI_Model {
 
         return $query->result();
     }
-
     public function get_categories()
     {
         $this->db->select('*');
@@ -196,9 +211,27 @@ class Database_Model extends CI_Model {
     }
     public function get_yorumlarim($id)//profil>yorumlarım sayfası
     {
-        $query=$this->db->query("select p.name as p_name,comments.id,comments.comment,comments.date from  comments
+        $query=$this->db->query("select p.name as p_name,comments.product_id, comments.id,comments.comment,comments.date from  comments
         inner join products as p on p.id=comments.product_id
         WHERE comments.user_id=$id
+        ");
+
+        return $query->result();
+    }
+    public function get_mesajlarim($id)//profil>yorumlarım sayfası
+    {
+        $query=$this->db->query("SELECT messages.* FROM  messages
+inner join users on users.username=messages.username
+WHERE users.id=$id
+        ");
+
+        return $query->result();
+    }
+    public function get_mesaj($id)//profil>yorum_detay sayfası
+    {
+        $query=$this->db->query("SELECT messages.*,answers.answer as cevap, answers.date as cevap_tarih FROM  messages
+left join answers on answers.message_id=messages.id
+WHERE messages.id=$id
         ");
 
         return $query->result();
@@ -208,6 +241,16 @@ class Database_Model extends CI_Model {
         $query=$this->db->query("select p.name as p_name,comments.id,comments.comment,comments.date from  comments
         inner join products as p on p.id=comments.product_id
         WHERE comments.id=$id
+        ");
+
+        return $query->result();
+    }
+    public function get_siparis_urunler($id)
+    {
+        $query=$this->db->query("select p.*,op.piece from orderr
+inner join order_product as op on op.order_id=orderr.id
+inner join products as p on p.id=op.product_id
+WHERE orderr.id=$id
         ");
 
         return $query->result();

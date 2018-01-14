@@ -15,7 +15,7 @@ class Home extends CI_Controller
         $this->load->model("Database_Model");
         $data["sliders"]=$this->Database_Model->get_show_sliders();
         $query = $this->db->query("SELECT * FROM settings");
-        $query2 = $this->db->query("SELECT * FROM products ORDER BY RAND() LIMIT 6 ");
+        $query2 = $this->db->query("SELECT * FROM products ORDER BY RAND() LIMIT 9 ");
         $query3 = $this->db->query("SELECT * FROM products ORDER BY id DESC LIMIT 6 ");
         $data["cats"] = $this->Database_Model->get_categories();
         $data["urunler"]= $query2->result();
@@ -23,6 +23,68 @@ class Home extends CI_Controller
         $data['veri'] = $query->result();
         $data['sayfa'] = "";
         $data['menu']="ana";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('_slider',$data);
+        $this->load->view('_sidebar', $data);
+        $this->load->view('_content',$data);
+        $this->load->view('_footer');
+    }
+    public function kategori_liste($id)
+    {
+        $this->load->model("Database_Model");
+        $data["sliders"]=$this->Database_Model->get_show_sliders();
+        $query = $this->db->query("SELECT * FROM settings");
+        $query3 = $this->db->query("SELECT * FROM products ORDER BY id DESC LIMIT 6 ");
+        $data["cats"] = $this->Database_Model->get_categories();
+        $data["urunler"]= $this->Database_Model->get_kategori_urunler($id);
+        $data["son"]= $query3->result();
+        $data['veri'] = $query->result();
+        $data['sayfa'] = $data["urunler"][0]->cat_name;
+        $data['menu']=$data["urunler"][0]->cat_name;
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('_slider',$data);
+        $this->load->view('_sidebar', $data);
+        $this->load->view('_content',$data);
+        $this->load->view('_footer');
+    }
+    public function kampanya()
+    {
+        $this->load->model("Database_Model");
+        $data["sliders"]=$this->Database_Model->get_show_sliders();
+        $query = $this->db->query("SELECT * FROM settings");
+        $query2=$this->db->query("select * from products where campaign like 'kampanya'");
+        $query3 = $this->db->query("SELECT * FROM products ORDER BY id DESC LIMIT 6 ");
+        $data["cats"] = $this->Database_Model->get_categories();
+        $data["urunler"]= $query2->result();
+        $data["son"]= $query3->result();
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "Kampanya";
+        $data['menu']="kampanya";
+
+
+        $this->load->view('_header', $data);
+        $this->load->view('_slider',$data);
+        $this->load->view('_sidebar', $data);
+        $this->load->view('_content',$data);
+        $this->load->view('_footer');
+    }
+    public function urun_ara()
+    {
+        $name=$this->input->post("ara");
+        $this->load->model("Database_Model");
+        $data["sliders"]=$this->Database_Model->get_show_sliders();
+        $query = $this->db->query("SELECT * FROM settings");
+        $query3 = $this->db->query("SELECT * FROM products ORDER BY id DESC LIMIT 6 ");
+        $data["cats"] = $this->Database_Model->get_categories();
+        $data["urunler"]= $this->Database_Model->urun_ara($name);
+        $data["son"]= $query3->result();
+        $data['veri'] = $query->result();
+        $data['sayfa'] = "";
+        $data['menu']= "";
 
 
         $this->load->view('_header', $data);
@@ -195,12 +257,13 @@ class Home extends CI_Controller
         $query = $this->db->query("SELECT * FROM settings");
         $data["comments"]=$this->Database_Model->get_comments($id);
         $data["cats"] = $this->Database_Model->get_categories();
-        $data['veri'] =$this->Database_Model->get_urun($id);
+        $data['urun'] =$this->Database_Model->get_urun($id);
+        $data['veri']=$query->result();
+        $data["veri"][0]->meta_keywords=$data["urun"][0]->meta_keywords;
+        $data["veri"][0]->meta_description=$data["urun"][0]->meta_description;
         $data['resimler']=$this->Database_Model->get_urun_galeri($id);
         $data['sayfa'] = "";
         $data['menu']="";
-
-
         $this->load->view('_header', $data);
         $this->load->view('_sidebar', $data);
         $this->load->view('urun_detay',$data);

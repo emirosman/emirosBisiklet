@@ -52,6 +52,20 @@
                                 <input type="text" name="stock" class="form-control" required>
                             </div>
                         </div>
+                        <!--Meta desctiption-->
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Meta Açıklama</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="meta_description" class="form-control" required>
+                            </div>
+                        </div>
+                        <!--Meta keywords-->
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Anahtar Kelimeler</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="meta_keywords" class="form-control" required>
+                            </div>
+                        </div>
                         <!--Açıklama-->
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Açıklama</label>

@@ -1,8 +1,7 @@
 <!--Content-->
 <div class="col-sm-10 padding-right">
-    <h2 class="title text-center">Favori Ürünler</h2>
+    <h2 class="title text-center">Siparişlerim</h2>
    <center><b class="text-success"><?=$this->session->flashdata("success")?></b></center>
-    <?php if(count($favoriler)>0) {?>
     <div id="cart_items">
         <div class="container col-sm-12">
             <div class="table-responsive cart_info">
@@ -12,23 +11,29 @@
                         <td class="image"><center>Ürün</center></td>
                         <td class="description"></td>
                         <td class="price">Fiyat</td>
-                        <td></td>
+                        <td class="quantity">Adet</td>
+                        <td class="total">Toplam</td>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($favoriler as $urun) {?>
+                    <?php foreach($siparisler as $siparis) {?>
                         <tr>
                             <td class="cart_product">
-                                <a href="<?=base_url()."home/urun_detay/".$urun->id?>"><img style="height: 100px" hspace="10px" src="<?=base_url()."uploads/products/".$urun->preview_img?>" alt=""></a>
+                                <a href="<?=base_url()."home/urun_detay/".$siparis->id?>"><img style="height: 100px" hspace="10px" src="<?=base_url()."uploads/products/".$siparis->preview_img?>" alt=""></a>
                             </td>
                             <td class="cart_description">
-                                <h4><a href="<?=base_url()."home/urun_detay/".$urun->id?>"><?=substr($urun->name,0,20)?></a></h4>
+                                <h4><a href="<?=base_url()."home/urun_detay/".$siparis->id?>"><?=substr($siparis->name,0,20)?></a></h4>
                             </td>
                             <td class="cart_price">
-                                <p><?=$urun->s_price?> ₺</p>
+                                <p><?=$siparis->s_price?> ₺</p>
                             </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href="<?=base_url()."uye/fav_sil/".$urun->id?>"><i class="fa fa-times"></i></a>
+                            <td class="cart_quantity">
+                                <div class="cart_price">
+                                    <p><?=$siparis->piece?></p>
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price"><?= $siparis->piece*$siparis->s_price?> ₺</p>
                             </td>
                         </tr>
                     <?php } ?>
@@ -37,9 +42,6 @@
             </div>
         </div>
     </div>
-    <?php }else{
-        echo "<center><b>Favorilerinizde ürün bulunmamakta,<a href='".base_url()."' style='color: #fe980f'> Alışverişe devam etmek için tıklayın</a></b></center>";
-    } ?>
 </div>
 </div>
 </div>

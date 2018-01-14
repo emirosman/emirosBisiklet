@@ -20,19 +20,19 @@
             </script>
         </div>
         <!--Ürün isim Fiyat-->
-        <form method="post" action="<?=base_url()."uye/sepet_ekle/".$veri[0]->id?>">
+        <form method="post" action="<?=base_url()."uye/sepet_ekle/".$urun[0]->id?>">
             <div class="col-sm-7">
                 <div class="product-information"><!--/product-information-->
                     <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                     <b class="text-success"><?=$this->session->flashdata("success")?></b><br>
-                    <h2><?=$veri[0]->name?></h2>
+                    <h2><?=$urun[0]->name?></h2>
                     <img src="images/product-details/rating.png" alt="" />
                     <span>
-                    <span><?= $veri[0]->s_price?> ₺</span>
-                        <?php if($veri[0]->stock>0){?>
+                    <span><?= $urun[0]->s_price?> ₺</span>
+                        <?php if($urun[0]->stock>0){?>
                             <label>Adet:</label>
             <!--Form-->
-                    <input name="piece" type="number" value="1"  min="1" max="<?=$veri[0]->stock?>"/>
+                    <input name="piece" type="number" value="1"  min="1" max="<?=$urun[0]->stock?>"/>
                             <button type="submit" class="btn btn-fefault cart">
                         <i class="fa fa-shopping-cart"></i>
                         Sepete Ekle
@@ -42,11 +42,11 @@
                 </span>
                  <div class="row">
                      <div class="col-sm-6"
-                    <p><b>Stok Durumu:</b><?=($veri[0]->stock>0)?"Mevcut":"Tükenmiş"?></p>
-                    <p><b>Kategori:</b><?=$veri[0]->cat_name?></p>
+                    <p><b>Stok Durumu:</b><?=($urun[0]->stock>0)?"Mevcut":"Tükenmiş"?></p>
+                    <p><b>Kategori:</b><?=$urun[0]->cat_name?></p>
                  </div>
                     <div class="col-sm-6">
-                     <a href="<?=base_url()."uye/fav_ekle/".$veri[0]->id?>" class="pull-left" style="color:#fe980f;"><i class="fa fa-star"></i> Favorilere Ekle  </a>
+                     <a href="<?=base_url()."uye/fav_ekle/".$urun[0]->id?>" class="pull-left" style="color:#fe980f;"><i class="fa fa-star"></i> Favorilere Ekle  </a>
                     </div>
                  </div>
                 </div><!--/product-information-->
@@ -69,7 +69,7 @@
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo">
-                                <p><?=$veri[0]->description?></p>
+                                <p><?=$urun[0]->description?></p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                     <hr>
                     <p style="color:#fe980f;"><b><?=(count($comments)>0)?"Sen de bir yorum bırak":"İlk yorumu siz yapın"?></b></p>
 
-                    <form action="<?=base_url()."uye/yorum_yap/".$veri[0]->id?>" method="post">
+                    <form action="<?=base_url()."uye/yorum_yap/".$urun[0]->id?>" method="post">
                         <textarea name="comment" placeholder="Yorumunuz..." ></textarea>
                         <button type="submit" class="btn btn-default pull-right">
                             Gönder
