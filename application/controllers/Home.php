@@ -9,7 +9,6 @@ class Home extends CI_Controller
         // Your own constructor code
     }
 
-
     public function index()
     {
         $this->load->model("Database_Model");
@@ -31,6 +30,7 @@ class Home extends CI_Controller
         $this->load->view('_content',$data);
         $this->load->view('_footer');
     }
+
     public function kategori_liste($id)
     {
         $this->load->model("Database_Model");
@@ -51,6 +51,7 @@ class Home extends CI_Controller
         $this->load->view('_content',$data);
         $this->load->view('_footer');
     }
+
     public function kampanya()
     {
         $this->load->model("Database_Model");
@@ -72,6 +73,7 @@ class Home extends CI_Controller
         $this->load->view('_content',$data);
         $this->load->view('_footer');
     }
+
     public function urun_ara()
     {
         $name=$this->input->post("ara");
@@ -124,6 +126,7 @@ class Home extends CI_Controller
         $this->load->view('iletisim', $data);
         $this->load->view('_footer');
     }
+
     public function bize_yazin()
     {
         $this->load->model("Database_Model");
@@ -150,7 +153,8 @@ class Home extends CI_Controller
             'message' => $this->input->post("message"),
             'status' => "unread",
             'time' => date("Y-m-d h:i:s"),
-            'ip' => $_SERVER['REMOTE_ADDR']
+            'ip' => $_SERVER['REMOTE_ADDR'],
+            'user_id'=>$this->session->user_sess["id"]
         );
         if ($this->db->insert('messages', $data)) {
             $this->session->set_flashdata("success", "Mesajınız Gönderildi..");
@@ -216,6 +220,8 @@ class Home extends CI_Controller
         $data = array(
             'username' => $this->input->post('username'),
             'email' => $this->input->post('email'),
+            'status'    => 1,
+            'authority' =>'user',
             'password' => $this->input->post('password'));
         $c = $this->Database_Model->kayit_kontrol($data,$this->input->post("password2"));
 
@@ -246,11 +252,12 @@ class Home extends CI_Controller
                     'create_time' => $db_result[0]->create_time
                 );
                 $this->session->set_userdata("user_sess", $res_array);
-                redirect(base_url() . "home");
+                redirect(base_url()."home");
             }
         }
 
     }
+
     public function urun_detay($id)
     {
         $this->load->model("Database_Model");
@@ -269,6 +276,7 @@ class Home extends CI_Controller
         $this->load->view('urun_detay',$data);
         $this->load->view('_footer');
     }
+
     public function test()
     {
         $this->load->model("Database_Model");

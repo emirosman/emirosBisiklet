@@ -10,11 +10,11 @@ class Uye extends CI_Controller {
         {redirect(base_url()."home/login");}
     }
 
-
-	public function index()
+    public function index()
 	{
 	}
-    public function profil()
+
+	public function profil()
     {
         $id=$this->session->user_sess["id"];
         $query = $this->db->query("SELECT * FROM settings");
@@ -32,6 +32,7 @@ class Uye extends CI_Controller {
         $this->load->view('profil',$data);
         $this->load->view('_footer');
     }
+
     public function bilgi_guncelle()
     {
         $id=$this->session->user_sess["id"];
@@ -43,9 +44,7 @@ class Uye extends CI_Controller {
             'surname'=>$this->input->post("surname"),
             'email'=>$this->input->post("email"),
             'phone'=>$this->input->post("phone"),
-            'newsletter'=>($this->input->post("newsletter")!="")?1:0,
-            'authority'=>$this->input->post("authority"),
-            'status'=>$this->input->post("status")
+            'newsletter'=>($this->input->post("newsletter")!="")?1:0
         );
         $ctrl_usrname=$this->db->query( "SELECT * FROM users WHERE username='".$data['username']."' AND id<>'".$id."'");
         $ctrl_email=$this->db->query( "SELECT * FROM users WHERE email='".$data['email']."' AND id<>'".$id."'");
@@ -62,12 +61,14 @@ class Uye extends CI_Controller {
             redirect(base_url()."uye/profil/".$id);
         }
         else{
+
             $this->Database_Model->update_data("users",$data,$id);
             $this->session->set_flashdata("success","Bilgiler güncellendi");
             redirect(base_url()."uye/profil/".$id);
 
         }
     }
+
     public function resim_guncelle()
     {
         $user_id=$this->session->user_sess["id"];
@@ -91,10 +92,12 @@ class Uye extends CI_Controller {
         }
         else
         {
-            echo $this->upload->display_errors();
+            $this->session->set_flashdata("img_alert","Yüklediğiniz resim uygun formatta değil");
+            redirect(base_url()."uye/profil/".$user_id);
 
         }
     }
+
     public function adres_guncelle($id)
     {
         $user_id=$this->session->user_sess["id"];
@@ -108,6 +111,7 @@ class Uye extends CI_Controller {
         redirect(base_url()."uye/profil/".$user_id);
 
     }
+
     public function adres_ekle()
     {
         $user_id=$this->session->user_sess["id"];
@@ -122,6 +126,7 @@ class Uye extends CI_Controller {
             redirect(base_url()."uye/profil/".$user_id);
         }
     }
+
     public function adres_sil($id)
     {
         $user_id=$this->session->user_sess["id"];
@@ -156,6 +161,7 @@ class Uye extends CI_Controller {
         $this->session->set_flashdata("success","Ürün sepete eklendi");
         redirect(base_url()."home/urun_detay/".$id);
     }
+
     public function sepetim()
     {
         $id=$this->session->user_sess["id"];
@@ -172,6 +178,7 @@ class Uye extends CI_Controller {
         $this->load->view('sepetim',$data);
         $this->load->view('_footer');
     }
+
     public function siparis_tamamla()
     {
         $id=$this->session->user_sess["id"];
@@ -189,6 +196,7 @@ class Uye extends CI_Controller {
         $this->load->view('siparis_tamamla',$data);
         $this->load->view('_footer');
     }
+
     public function siparis_kayit()
     {
         $this->load->model("Database_Model");
@@ -199,7 +207,7 @@ class Uye extends CI_Controller {
             'ip'        =>$_SERVER['REMOTE_ADDR'],
             'total'     =>(double)$this->input->post('total'),
             'pay_type'  =>$this->input->post('pay_type'),
-            'order_status'=>"Yeni",
+            'order_status'=>"yeni",
             'address'   =>$this->input->post('address'),
             'phone'     =>$this->input->post('phone'),
             'name_surname'=>$this->input->post('name_surname')
@@ -245,6 +253,7 @@ class Uye extends CI_Controller {
         $this->load->view('siparislerim',$data);
         $this->load->view('_footer');
     }
+
     public function yorum_yap($id)
     {
         $data=array(
@@ -257,6 +266,7 @@ class Uye extends CI_Controller {
         $this->session->set_flashdata("success","Yorumunuz eklendi");
         redirect(base_url()."home/urun_detay/".$id);
     }
+
     public function yorumlarim()
     {
         $id=$this->session->user_sess["id"];
@@ -273,12 +283,14 @@ class Uye extends CI_Controller {
         $this->load->view('yorumlarim',$data);
         $this->load->view('_footer');
     }
+
     public function yorum_sil($id)
     {
         $this->db->query("Delete from comments where id=$id");
         $this->session->set_flashdata("success","Yorumunuz silindi");
         redirect(base_url()."uye/yorumlarim");
     }
+
     public function yorum_detay($id)
     {
         $query = $this->db->query("SELECT * FROM settings");
@@ -294,12 +306,14 @@ class Uye extends CI_Controller {
         $this->load->view('yorum_detay',$data);
         $this->load->view('_footer');
     }
+
     public function sepet_urun_sil($id)
     {
         $this->db->query("DELETE FROM basket WHERE product_id=$id");
         $this->session->set_flashdata("success","Ürün sepetinizden silindi");
         redirect(base_url()."uye/sepetim");
     }
+
     public function fav_ekle($p_id)
     {
         $user_id=$this->session->user_sess["id"];
@@ -319,6 +333,7 @@ class Uye extends CI_Controller {
         }
         redirect(base_url()."home/urun_detay/".$p_id);
     }
+
     public function fav_sil($p_id)
     {
         $user_id=$this->session->user_sess["id"];
@@ -327,6 +342,7 @@ class Uye extends CI_Controller {
         $this->session->set_flashdata("success","Ürün favorilerden silindi");
         redirect(base_url()."uye/favorilerim");
     }
+
     public function favorilerim()
     {
         $user_id=$this->session->user_sess["id"];
@@ -344,12 +360,13 @@ class Uye extends CI_Controller {
         $this->load->view('favorilerim',$data);
         $this->load->view('_footer');
     }
+
     public function siparis_sil($id)
     {
         $this->load->model("Database_Model");
         $query=$this->db->query("SELECT order_status FROM orderr where id=$id");
         $result=$query->result();
-        if($result[0]->order_status=="Yeni")
+        if($result[0]->order_status=="yeni")
         {
             $this->Database_Model->siparis_iptal_urun_ekle($id);
             $this->db->query("DELETE FROM orderr where id=$id");
@@ -358,6 +375,7 @@ class Uye extends CI_Controller {
         }
 
     }
+
     public function mesajlarim()
     {
         $id=$this->session->user_sess["id"];
@@ -374,6 +392,7 @@ class Uye extends CI_Controller {
         $this->load->view('mesajlarim',$data);
         $this->load->view('_footer');
     }
+
     public function mesaj_detay($id)
     {
         $query = $this->db->query("SELECT * FROM settings");
@@ -398,6 +417,7 @@ class Uye extends CI_Controller {
             redirect(base_url()."uye/mesajlarim/");
         }
     }
+
     public function siparis_detay($id)
     {
         $this->load->model("Database_Model");

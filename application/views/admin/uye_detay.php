@@ -92,11 +92,9 @@
                 </div>
                 <div class="card-body">
                         <div class="form-group row">
-                            <img class="rounded-circle col-5 " height="200px" src="<?=base_url()."uploads/users/".$uye[0]->image?>">
-                            <div class="col-7">
-                                <?=$uye[0]->image?>
-                            </div>
-                </div>
+                         <center><img class="rounded-circle col-5 " height="200px" src="<?=base_url()."uploads/users/".$uye[0]->image?>"></center>
+
+                        </div>
             </div>
         </div>
 

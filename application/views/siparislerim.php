@@ -39,7 +39,7 @@
                             </td>
                             <td class="cart_delete">
                                 <a href="<?=base_url()."uye/siparis_detay/".$siparis->id?>" class="btn btn-warning"> Detay</a>
-                                <?php if($siparis->order_status=="Yeni"){?>
+                                <?php if($siparis->order_status=="yeni"){?>
                                 <a class="cart_quantity_delete" href="<?=base_url()."uye/siparis_sil/"."$siparis->id"?>"><i class="fa fa-times"></i></a>
                                 <?php } ?>
                             </td>

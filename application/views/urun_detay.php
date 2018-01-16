@@ -59,7 +59,6 @@
         <div class="col-sm-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#description" data-toggle="tab">Açıklama</a></li>
-                <li><a href="#tecnic_details" data-toggle="tab">Teknik Bilgiler</a></li>
                 <li><a href="#reviews" data-toggle="tab">Yorumlar (<?=count($comments)?>)</a></li>
             </ul>
         </div>
@@ -70,21 +69,6 @@
                         <div class="single-products">
                             <div class="productinfo">
                                 <p><?=$urun[0]->description?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-pane fade" id="tecnic_details" >
-                <div class="col-sm-3">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo">
-                                <img src="images/home/gallery1.jpg" alt="" />
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                             </div>
                         </div>
                     </div>

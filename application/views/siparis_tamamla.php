@@ -17,7 +17,7 @@
                     </div>
                     <label class="col-md-3">Adres Seç</label>
                     <div class="form-group col-md-9">
-                        <select name="address">
+                        <select name="address" required>
                             <?php foreach ($address as $adres){?>
                             <option value="<?=$adres->address?>"><?=$adres->name?></option>
                             <?php } ?>

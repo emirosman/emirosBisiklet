@@ -9,8 +9,6 @@ class Urunler extends CI_Controller {
         if( !$this->session->userdata("admin_sess"))
         {redirect(base_url()."admin/login");}
     }
-
-
 	public function index()
 	{
 	    $this->load->model("Database_Model");
@@ -49,7 +47,8 @@ class Urunler extends CI_Controller {
             'meta_keywords'=>$this->input->post("meta_keywords"),
             'description'=>$this->input->post("editor1"),
             'create_time'=>date("Y-m-d h:i:s"),
-            'update_time'=>date("Y-m-d h:i:s")
+            'update_time'=>date("Y-m-d h:i:s"),
+            'campaign'      =>($this->input->post("campaign")!="")?"kampanya":""
         );
 
         if($this->db->insert('products',$urun_ekle))
@@ -86,7 +85,8 @@ class Urunler extends CI_Controller {
             'stock'=>$this->input->post("stock"),
             'meta_description'=>$this->input->post("meta_description"),
             'meta_keywords'=>$this->input->post("meta_keywords"),
-            'description'=>$this->input->post("editor1")
+            'description'=>$this->input->post("editor1"),
+            'campaign'      =>($this->input->post("campaign")!="")?"kampanya":""
         );
         $this->Database_Model->update_data("products",$data,$id);
         $this->session->set_flashdata("success","Bilgiler güncellendi");
@@ -224,6 +224,36 @@ class Urunler extends CI_Controller {
             $this->session->set_flashdata("success","Slider eklendi");
             redirect(base_url()."admin/urunler/slider");
         }
+    }
+    public function kampanya_urunler()
+    {
+        $query=$this->db->query("SELECT * FROM products WHERE campaign='kampanya'");
+        $data["urun_list"]=$query->result();
+
+        $this->load->view('admin/_header');
+        $this->load->view('admin/_sidebar');
+        $this->load->view('admin/kampanya_urunler',$data);
+        $this->load->view('admin/_footer');
+
+    }
+    public function yorumlar()
+    {
+        $query=$this->db->query("select comments.* ,u.username,p.name from comments
+                                 inner join users as u on u.id=comments.user_id
+                                 inner join products as p  on p.id=comments.product_id
+                                 ORDER BY comments.id DESC");
+        $data["yorumlar"]=$query->result();
+
+        $this->load->view('admin/_header');
+        $this->load->view('admin/_sidebar');
+        $this->load->view('admin/yorumlar',$data);
+        $this->load->view('admin/_footer');
+    }
+    public function yorum_sil($id)
+    {
+        $this->db->query("DELETE FROM comments WHERE id=$id");
+        $this->session->set_flashdata("success","Yorum silindi");
+        redirect(base_url()."admin/urunler/yorumlar");
     }
 
 }

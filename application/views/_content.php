@@ -24,7 +24,9 @@
                 </div>
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
+                        <?php if($urun->stock >0) {?>
                         <li><a href="<?=base_url()."uye/sepet_ekle/".$urun->id?>"> <i class="fa fa-shopping-cart"></i>Sepete Ekle</a></li>
+                        <?php }?>
                         <li><a href="<?=base_url()."uye/fav_ekle/".$urun->id?>"><i class="fa fa-star"></i>Favorilere Ekle</a></li>
                     </ul>
                 </div>

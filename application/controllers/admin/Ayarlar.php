@@ -47,4 +47,22 @@ class Ayarlar extends CI_Controller {
         $this->session->set_flashdata("ayar_msj","Bilgiler güncellendi");
         redirect(base_url()."admin/ayarlar");
     }
+    public function duyuru()
+    {
+        $query=$this->db->query("SELECT notice FROM settings");
+        $data["duyuru"]=$query->result();
+        $this->load->view('admin/_header');
+        $this->load->view('admin/_sidebar');
+        $this->load->view('admin/duyuru',$data);
+        $this->load->view('admin/_footer');
+    }
+    public function duyuru_guncelle()
+    {
+        $this->load->model("Database_Model");
+        $data["notice"]=$this->input->post("notice");
+        $this->Database_Model->update_data("settings",$data,1);
+        $this->session->set_flashdata("success","Duyuru güncellendi");
+        redirect(base_url()."admin/ayarlar/duyuru");
+
+    }
 }

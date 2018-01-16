@@ -36,12 +36,15 @@
     <div class="header-middle"><!--header-middle-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="logo pull-left">
                         <a href="<?=base_url()?>"><img style="height: 60px " src="<?= base_url()?>/assets/images/home/logo2.png" alt="" /></a>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-5">
+                  <p style="color: #fe980f"><marquee><?=$veri[0]->notice?> </marquee></p>
+                </div>
+                <div class="col-sm-4">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <?php if($this->session->user_sess){?>
@@ -60,9 +63,9 @@
             </div>
         </div>
     </div><!--/header-middle-->
-
     <div class="header-bottom"><!--header-bottom-->
         <div class="container">
+
             <div class="row">
                 <div class="col-sm-9">
                     <div class="navbar-header">
@@ -86,11 +89,12 @@
                 <div class="col-sm-3">
                     <form action="<?=base_url()."home/urun_ara"?>" method="post">
                     <div class="search_box pull-right">
-                        <input name="ara" type="text" placeholder="Search"/>
+                        <input name="ara" type="text" placeholder="Ara..."/>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
     </div><!--/header-bottom-->
+
 </header><!--/header-->

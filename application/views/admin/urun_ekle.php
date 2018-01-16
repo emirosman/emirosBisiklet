@@ -52,6 +52,13 @@
                                 <input type="text" name="stock" class="form-control" required>
                             </div>
                         </div>
+                        <!--Kampanya-->
+                        <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Kampanya</label>
+                            <div class="col-sm-9 ">
+                                <input id="option" class="checkbox-template" type="checkbox" name="campaign"><label for="option">Kampanya ürünü olarak ekle</label>
+                            </div>
+                        </div>
                         <!--Meta desctiption-->
                         <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Meta Açıklama</label>

@@ -54,8 +54,10 @@
                     <div class="col-sm-6">
                         <form class="form-horizontal" method="post" action="<?=base_url()."admin/mesajlar/cevapla/".$veri[0]->id?>">
                             <!--Mesaj Cevapla-->
+
+                            <input type="hidden" name="email" value="<?=$veri[0]->email?>">
                             <div class="form-group row">
-                                <textarea name="answer" cols="50" rows="5" ></textarea>
+                                <textarea required name="answer" cols="50" rows="5" ></textarea>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-4 offset-sm-3">

@@ -64,7 +64,7 @@
                             <!--Newsletter-->
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Bülten</label>
-                                <div class="col-sm-8 ">
+                                <div class="col-sm-10 ">
                                     <input id="option" class="checkbox-template" type="checkbox" <?=($uye[0]->newsletter==0)?"":"checked"?> name="newsletter"><label for="option">Kampanyalardan haberdar olmak istiyorum</label>
                                 </div>
                             </div>

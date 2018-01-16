@@ -2,6 +2,7 @@
     <!-- Page Header-->
     <h2 class="title text-center">Profilim</h2>
     <center>  <?=($this->session->flashdata("success")==null)?"": "<label class='text-success'>".$this->session->flashdata("success")."</label>"?></center>
+    <center>  <?=($this->session->flashdata("img_alert")==null)?"": "<label class='text-warning'>".$this->session->flashdata("img_alert")."</label>"?></center>
 
     <div class="row">
         <!--Form Başlangıç Bilgiler-->

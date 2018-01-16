@@ -53,7 +53,6 @@ class Database_Model extends CI_Model {
 
         return $query->result();
     }
-
     public function get_kategori_urunler($id)
     {
         $query=$this->db->query("SELECT products.*, category.name as cat_name , category.id as cat_id
